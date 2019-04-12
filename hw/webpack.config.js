@@ -2,7 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
-    entry: "./src/js/index.js",
+    entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "public/js"),
       filename: "bundle.js"
@@ -16,7 +16,7 @@ module.exports = {
       rules: [
         {
           test: /\.js$/,
-          exclude: /(node_modules)/,
+          exclude: /(node_modules)|(test)/,
           use: {
             loader: "babel-loader",
             options: {
