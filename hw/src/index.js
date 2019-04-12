@@ -1,10 +1,11 @@
 import "./styles/style.scss";
 import SinglePageApp from "./single_page_app";
-import BaseComponent from "./components/BaseComponent";
+import SimpleContainer from "./components/SimpleContainer";
 import PubSub from "./helpers/pub_sub";
 
 // App entry point
 document.addEventListener("DOMContentLoaded", () => {
-    
-    new SinglePageApp(new BaseComponent());
-})
+    console.log("Initialising");
+    new SinglePageApp(SimpleContainer);
+    PubSub.publish("APP:CREATED");
+});

@@ -2,7 +2,7 @@ export default class PubSub {
 
     static publish(channel, payload = null){
         let e = new CustomEvent(channel, { 
-            payload: payload 
+            detail: payload 
         });
         document.dispatchEvent(e);
 
