@@ -1,0 +1,9 @@
+.testBox {
+    width: 150px;
+    height: 150px;
+    background-color: blue;
+
+    &:hover {
+        background-color: red;
+    }
+}
