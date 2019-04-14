@@ -8,7 +8,6 @@ export default class MutationWatcher {
     }
 
     notify = () => {
-        console.log("yay");
         PubSub.publish("APP:UPDATE");
     }
 

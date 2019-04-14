@@ -7,7 +7,7 @@ export default class PubSub {
         document.dispatchEvent(e);
 
         // Send message out to low level stuff
-        e = new CustomEvent("APP:UPDATE", null);
+        e = new CustomEvent("APP:UPDATE");
         document.dispatchEvent(e);
     };
 

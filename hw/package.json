@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --require @babel/register './**/*.spec.js'",
     "build": "webpack --config webpack.config.js",
-    "build-watch": "webpack -w --config webpack.config.js"
+    "build-watch": "API_KEY=5830a81af8a14356b0695751191304 webpack -w --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -28,5 +28,9 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv-webpack": "^1.7.0"
   }
 }
