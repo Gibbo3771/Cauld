@@ -1,4 +1,4 @@
-import PubSub from "./pub_sub";
+import { publish, subscribe } from "./pub_sub";
 
 export default class MutationWatcher {
     constructor(target){

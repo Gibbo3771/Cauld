@@ -1,12 +1,9 @@
-import PubSub from "../helpers/pub_sub";
 import MutationWatcher from "../helpers/mutation_watcher";
 
 export default class View {
     constructor(props){
-        this.parent = document.createElement('div');
-        this.state = {};
-        this.prevState = null;
         this.props = props;
+        this.parent = this.props.parent;
     };
     
     render() {
@@ -27,9 +24,7 @@ export default class View {
         return JSON.stringify(this.state) !== JSON.stringify(this.prevState);
     };
 
-    setState = (state) => {
-        this.prevState = this.state;
-        this.state = state;
-        PubSub.publish("APP:UPDATE");
+    appendChild = (child) => {
+        this.parent.appendChild(child);
     };
 }

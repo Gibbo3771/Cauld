@@ -1,17 +1,13 @@
-export default class PubSub {
 
-    static publish(channel, payload = null){
-        let e = new CustomEvent(channel, { 
-            detail: payload 
-        });
-        document.dispatchEvent(e);
+export const publish = (channel, payload) => {
+    let e = new CustomEvent(channel, { 
+        detail: payload 
+    });
+    document.dispatchEvent(e);
+};
 
-        // Send message out to low level stuff
-        e = new CustomEvent("APP:UPDATE");
-        document.dispatchEvent(e);
-    };
+export const subscribe = (channel, callback) => {
+    document.addEventListener(channel, callback);
+};
 
-    static subcribe(channel, callback){
-        document.addEventListener(channel, callback);
-    };
-}
+// export default { publish, subscribe };
