@@ -24,7 +24,7 @@ export default class SinglePageApp {
     getWeatherForecast = (location) => {
         this.weather.forecast(location, 1, (response) => {
             const singleDayForecast = new SingleDayForecast(response.data);
-            publish("App:weather-ready")
+            publish("App:weather-ready", { forecast : singleDayForecast })
         });
     };
 

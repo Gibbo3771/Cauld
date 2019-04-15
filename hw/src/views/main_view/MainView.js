@@ -11,11 +11,7 @@ export default class MainView extends View {
         subscribe("App:weather-ready", this.render);
     };
 
-    render(weatherData){
-        console.log("render");
-    };
-
-    displayWeatherData = (evt) => {
-        // Display weather stuff
+    render = (data) => {
+        const currentDay = new DayView({...this.props, forecast: data.detail.forecast});
     }
 }

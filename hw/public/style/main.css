@@ -11,9 +11,9 @@ html, body {
   width: 100%;
   height: 100%; }
 
-.container {
+.weather {
   width: 150px;
-  height: auto;
+  height: 150px;
   border: 1px solid black; }
 
 .autocomplete {

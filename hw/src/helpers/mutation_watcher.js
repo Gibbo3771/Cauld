@@ -1,5 +1,6 @@
 import { publish, subscribe } from "./pub_sub";
 
+// DEPRECIATED
 export default class MutationWatcher {
     constructor(target){
         const config = { attributes: true, childList: true, subtree: true };
@@ -8,7 +9,7 @@ export default class MutationWatcher {
     }
 
     notify = () => {
-        PubSub.publish("APP:UPDATE");
+        publish("APP:UPDATE");
     }
 
     disconnect = () => {
