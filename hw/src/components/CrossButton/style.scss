@@ -1,0 +1,16 @@
+.button-cross {
+  position: absolute;
+  background: rgba(150, 118, 187, 0);
+  border: 0px;
+  color: black;
+  font-size: 18px;
+  min-width: 5px;
+  min-height: 0.25rem;
+  bottom: 1rem + 0.25rem;
+  right: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.125);
+  }
+}
