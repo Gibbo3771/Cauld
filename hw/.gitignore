@@ -2,5 +2,4 @@ node_modules/
 public/js/*
 public/styles/*
 
-.DS_Store
-.env
+keystore.js
