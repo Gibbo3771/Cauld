@@ -64,14 +64,14 @@ body {
   justify-content: center; }
 
 .page-title {
-  font-size: 4rem; }
+  font-size: 4rem;
+  color: white; }
 
 .weather {
   display: flex;
   flex-direction: column;
   width: 200px;
   height: 300px;
-  background-color: #72b1fa;
   color: white;
   align-items: center;
   padding: 2rem;
@@ -90,6 +90,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center; }
+
+.blue {
+  background-color: #72b1fa; }
 
 .button-cross {
   position: absolute;

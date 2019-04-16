@@ -38,6 +38,8 @@ export default class TodayView extends View {
         <h4>Wind</h4>
         <p>${windMPH}mph ${windDir}</p>
     <div>`;
+
+    this.parent.classList.add("blue");
   };
 
   createTextElement = (text, type) => {
@@ -55,6 +57,7 @@ export default class TodayView extends View {
   bindEvents = () => {
     subscribe("CrossButton:clear", data => {
       this.parent.innerHTML = "";
+      this.parent.classList.remove("blue");
     });
   };
 }
