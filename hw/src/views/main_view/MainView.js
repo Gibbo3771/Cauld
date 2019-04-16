@@ -1,5 +1,4 @@
 import View from "../View";
-import DayView from "../day_view/DayView";
 import WeatherAPI from "../../helpers/weather_api";
 import API_KEY from "../../../keystore";
 import { publish, subscribe } from "../../helpers/pub_sub";

@@ -10,7 +10,6 @@ export default class TodayView extends View {
   }
 
   render = () => {
-    console.log(this.props);
     const {
       lastUpdated,
       icon,

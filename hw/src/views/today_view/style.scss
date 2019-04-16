@@ -1,15 +1,13 @@
 .weather {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 200px;
   height: 300px;
-  //   border: 1px solid black;
+  background-color: rgb(114, 177, 250);
+  color: white;
   align-items: center;
-  justify-content: center;
-
-  > div {
-    margin-top: 5px;
-  }
+  padding: 2rem;
+  border-radius: 5px;
 }
 
 .temp-current {

@@ -45,7 +45,7 @@ export default class WeatherAPI {
         callback(response);
       })
       .catch(err => {
-        console.log(err);
+        // All good here
       });
   };
 }

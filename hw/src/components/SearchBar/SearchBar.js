@@ -54,7 +54,6 @@ export default class SearchBar {
       this.updateLocationList(data.detail.locations);
     });
     subscribe("CrossButton:clear", data => {
-      console.log("yay");
       this.input.value = "";
       this.clearLocationList();
     });
