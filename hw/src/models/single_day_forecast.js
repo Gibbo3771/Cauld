@@ -1,5 +1,7 @@
 export default class SingleDayForecast {
   constructor(props) {
+    const { date } = props;
+    this.date = date;
     // weather
     const {
       maxtemp_c,

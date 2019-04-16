@@ -25,16 +25,18 @@ export default class SinglePageApp {
   };
 
   getWeatherForecast = location => {
-    this.weather.forecast(location, 5, response => {
+    console.log("getting weather");
+    this.weather.forecast(location, 7, response => {
+      const { current, forecast } = response.data;
       const currentWeather = new CurrentWeather(response.data);
       const forecastDays = [];
-      for (const day of response.data.forecast.forecastday) {
-        const forecast = new SingleDayForecast(day);
-        forecastDays.push(forecast);
+      for (const day of forecast.forecastday) {
+        console.log(day);
+        forecastDays.push(new SingleDayForecast(day));
       }
       publish("App:weather-ready", {
         current: currentWeather,
-        forecast: forecastDays[0]
+        forecast: forecastDays
       });
     });
   };
@@ -45,6 +47,11 @@ export default class SinglePageApp {
     });
     subscribe("SearchBar:location-selected", data => {
       this.getWeatherForecast(data.detail.location);
+    });
+    subscribe("App:clear", () => {
+      const e = document.getElementById("forecast");
+      e.innerHTML = "";
+      e.classList.remove("blue");
     });
   };
 }

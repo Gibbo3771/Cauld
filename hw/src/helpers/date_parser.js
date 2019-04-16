@@ -14,13 +14,13 @@ const months = {
 };
 
 const days = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thu",
-  5: "Fri",
-  6: "Sat"
+  0: "Sunday",
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday"
 };
 
 export const prettyDateParse = dateString => {
@@ -33,8 +33,9 @@ export const prettyDateParse = dateString => {
 const descriptor = date => {
   const today = new Date();
   const d = new Date(date);
-  if (today.getDate() === d.getDate()) return "CURRENT WEATHER";
-  if (today.getDate() + 1 === d.getDate() + 1) return "TOMORROW";
+  if (today.getDate() === d.getDate()) return "TODAY";
+  if (today.getDate() + 2 === d.getDate() + 1) return "TOMORROW";
+  return `${d.getDate()} ${getMonthString(d.getMonth())}`;
 };
 
 const date = date => {

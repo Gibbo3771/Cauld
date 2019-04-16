@@ -12,6 +12,7 @@ export default class SearchBar {
   }
 
   requestLocations = evt => {
+    if (this.input.value.length < 2) return;
     evt.preventDefault();
     publish("SearchBar:search", { location: evt.target.value });
   };
@@ -43,6 +44,7 @@ export default class SearchBar {
   };
 
   selectLocation = evt => {
+    publish("App:clear");
     const text = evt.target.innerText;
     this.input.value = text;
     this.clearLocationList();
@@ -53,7 +55,7 @@ export default class SearchBar {
     subscribe("App:locations-ready", data => {
       this.updateLocationList(data.detail.locations);
     });
-    subscribe("CrossButton:clear", data => {
+    subscribe("App:clear", data => {
       this.input.value = "";
       this.clearLocationList();
     });

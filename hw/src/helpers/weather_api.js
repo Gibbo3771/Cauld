@@ -34,18 +34,12 @@ export default class WeatherAPI {
   };
 
   createURL = (method, params) => {
-    return `${URL}/${method}.json?${queryString.stringify(params)};`;
+    return `${URL}/${method}.json?${queryString.stringify(params)}`;
   };
 
   request = (url, callback) => {
-    console.log(url);
-    axios
-      .get(url)
-      .then(response => {
-        callback(response);
-      })
-      .catch(err => {
-        // All good here
-      });
+    axios.get(url).then(response => {
+      callback(response);
+    });
   };
 }

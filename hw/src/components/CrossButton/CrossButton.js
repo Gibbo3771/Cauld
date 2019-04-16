@@ -8,7 +8,7 @@ export default class CrossButton {
   }
 
   onClick = () => {
-    publish("CrossButton:clear");
+    publish("App:clear");
   };
 
   bindEvents = () => {
