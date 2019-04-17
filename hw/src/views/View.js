@@ -4,12 +4,6 @@ export default class View {
     this.parent = this.props.parent;
   }
 
-  destroy = () => {
-    while (this.parent.firstChild) {
-      this.parent.removeChild(this.parent.firstChild);
-    }
-  };
-
   appendChild = child => {
     this.parent.appendChild(child);
   };
