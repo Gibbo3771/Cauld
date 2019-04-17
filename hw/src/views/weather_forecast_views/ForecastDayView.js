@@ -36,7 +36,7 @@ export default class ForecastDayView extends View {
     </div>
     <span class="temperature-range">${minTempC}c°<sub>Lo</sub> ${maxTempC}c°<sub>Hi</sub></span>
     <div class="wind">
-        <h4>Wind</h4>
+        <h4>Wind Max</h4>
         <p>${maxWindMPH}mph</p>
     <div>`;
 

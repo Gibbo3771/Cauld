@@ -8,7 +8,7 @@ export default class CrossButton {
   }
 
   onClick = () => {
-    publish("App:clear");
+    publish("CrossButton:clear-search");
   };
 
   bindEvents = () => {

@@ -55,7 +55,7 @@ export default class SearchBar {
     subscribe("App:locations-ready", data => {
       this.updateLocationList(data.detail.locations);
     });
-    subscribe("App:clear", data => {
+    subscribe("CrossButton:clear-search", data => {
       this.input.value = "";
       this.clearLocationList();
     });

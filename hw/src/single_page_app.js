@@ -48,10 +48,10 @@ export default class SinglePageApp {
     subscribe("SearchBar:location-selected", data => {
       this.getWeatherForecast(data.detail.location);
     });
-    // subscribe("App:clear", () => {
-    //   const e = document.getElementById("forecast");
-    //   e.innerHTML = "";
-    //   e.classList.remove("blue");
-    // });
+    subscribe("App:clear", () => {
+      const e = document.getElementById("forecast");
+      e.innerHTML = "";
+      e.classList.remove("blue");
+    });
   };
 }
