@@ -32,7 +32,9 @@ export default class TodayView extends View {
           <h1>${getDayString(date.getDay())}</h1>
           <h3>${prettyDateParse(date).desciptor}</h3>
         </div>
-        <span class="temp-current">${tempC}c°</span>
+    </div>
+    <div class="temp-current">
+      <p>${tempC}c°</p>
     </div>
     <div class="icon">
       <img src="http:${icon}" />
@@ -44,7 +46,7 @@ export default class TodayView extends View {
     <div class="wind">
         <h4>Wind</h4>
         <p>${windMPH}mph ${windDir}</p>
-    <div>`;
+    </div>`;
 
     this.day.classList.add("blue", "current-day");
     this.appendChild(this.day);

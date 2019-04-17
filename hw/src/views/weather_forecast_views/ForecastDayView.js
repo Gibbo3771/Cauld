@@ -38,7 +38,7 @@ export default class ForecastDayView extends View {
     <div class="wind">
         <h4>Wind Max</h4>
         <p>${maxWindMPH}mph</p>
-    <div>`;
+    </div>`;
 
     this.day.classList.add("blue");
     this.appendChild(this.day);
