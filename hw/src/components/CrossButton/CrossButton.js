@@ -1,12 +1,11 @@
+import Component from "../Component";
 import { publish } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 import { classMap } from "lit-html/directives/class-map";
 
-export default class CrossButton {
+export default class CrossButton extends Component {
   constructor(props) {
-    this.props = props;
-    // this.button = document.getElementById("button-cross");
-    // this.bindEvents();
+    super(props);
   }
 
   render = () => {
@@ -24,7 +23,9 @@ export default class CrossButton {
     publish("CrossButton:clear-search");
   };
 
-  bindEvents = () => {
-    this.button.addEventListener("click", this.onClick);
-  };
+  componentDidMount() {
+    document
+      .getElementById("button-cross")
+      .addEventListener("click", this.onClick);
+  }
 }

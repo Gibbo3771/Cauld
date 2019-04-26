@@ -1,8 +1,10 @@
+import Component from "../Component";
 import { publish, subscribe } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 
-export default class SearchBar {
+export default class SearchBar extends Component {
   constructor(props) {
+    super(props);
     this.props = props;
     // this.input = document.getElementById("search");
     // this.input.addEventListener("input", this.requestLocations);

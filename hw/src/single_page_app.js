@@ -1,24 +1,39 @@
+import Component from "./components/Component";
 import { publish, subscribe } from "./helpers/pub_sub";
 import WeatherAPI from "./helpers/WeatherAPI";
 import API_KEY from "../keystore";
-import MainView from "./views/main_view/MainView";
+import Weather from "./views/main_view/Weather";
 import SearchBar from "./components/SearchBar/SearchBar";
 import CrossButton from "./components/CrossButton/CrossButton";
 import SingleDayForecast from "./models/single_day_forecast";
 import CurrentWeather from "./models/current_weather";
 import { render } from "lit-html";
 
-export default class SinglePageApp {
-  constructor() {
+export default class SinglePageApp extends Component {
+  constructor(props) {
+    super(props);
     this.root = document.getElementById("root");
-    document.body.appendChild(this.root);
+    this.components = [];
     this.bindEvents();
     this.weather = new WeatherAPI({ apiKey: API_KEY });
-    this.mainView = new MainView({ root: this.root });
+    this.weather = new Weather();
   }
 
   render = () => {
-    render(this.mainView.render(), this.root);
+    render(this.weather.render(), this.root);
+    this.componentsMounted();
+  };
+
+  componentsMounted = () => {
+    this.components.forEach(component => {
+      if (component.mounted) return;
+      component.mounted = true;
+      component.componentDidMount();
+    });
+  };
+
+  componentStateChanged = component => {
+    component.componentDidUpdate();
   };
 
   locationSearch = data => {
@@ -53,6 +68,12 @@ export default class SinglePageApp {
       const e = document.getElementById("forecast");
       e.innerHTML = "";
       e.classList.remove("blue");
+    });
+    subscribe("Component:created", evt => {
+      this.components.push(evt.detail);
+    });
+    subscribe("Component:state-changed", evt => {
+      this.componentStateChanged(evt.detail);
     });
   };
 }
