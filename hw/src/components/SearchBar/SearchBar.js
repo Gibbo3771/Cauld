@@ -1,5 +1,5 @@
-import API_KEY from "../../../keystore";
 import { publish, subscribe } from "../../helpers/pub_sub";
+import { html } from "lit-html";
 
 export default class SearchBar {
   constructor(props) {
@@ -10,6 +10,18 @@ export default class SearchBar {
     this.input.addEventListener("click", this.requestLocations);
     this.bindEvents();
   }
+
+  render = () => {
+    return html`
+      <input
+        id="search"
+        class="input"
+        type="text"
+        autocomplete="off"
+        placeholder="Enter city or zipcode"
+      />
+    `;
+  };
 
   requestLocations = evt => {
     if (this.input.value.length < 2) return;

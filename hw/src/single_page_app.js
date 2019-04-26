@@ -25,7 +25,6 @@ export default class SinglePageApp {
   };
 
   getWeatherForecast = location => {
-    console.log("getting weather");
     this.weather.forecast(location, 7, response => {
       const { current, forecast } = response.data;
       const currentWeather = new CurrentWeather(response.data);
