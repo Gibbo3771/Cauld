@@ -11,29 +11,34 @@ export default class MainView extends View {
     this.parent = document.getElementById("main-view");
     this.weather = new WeatherAPI({ apiKey: API_KEY });
     subscribe("App:weather-ready", this.render);
+    this.renderDelayMillis = 50;
   }
 
   render = data => {
     const d = data.detail.forecast;
-    const today = new TodayView({
+    const today = new ForecastDayView({
       root: this.props.root,
+      isToday: true,
       current: data.detail.current,
       forecast: d[0]
     });
-    const tomorrow = new ForecastDayView({
-      root: this.props.root,
-      forecast: d[1]
-    });
 
-    today.render();
-    tomorrow.render();
+    this.renderDelay(this.renderDelayMillis, today.render);
 
-    for (let i = 2; i < d.length; i++) {
+    for (let i = 1; i < d.length; i++) {
       const day = new ForecastDayView({
         root: this.props.root,
+        isToday: false,
         forecast: d[i]
       });
-      day.render();
+      this.renderDelay(i * this.renderDelayMillis, day.render);
     }
+  };
+
+  renderDelay = (milliseconds, callback) => {
+    const id = setInterval(() => {
+      clearInterval(id);
+      callback();
+    }, milliseconds);
   };
 }

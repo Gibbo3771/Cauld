@@ -31,7 +31,6 @@ export default class SinglePageApp {
       const currentWeather = new CurrentWeather(response.data);
       const forecastDays = [];
       for (const day of forecast.forecastday) {
-        console.log(day);
         forecastDays.push(new SingleDayForecast(day));
       }
       publish("App:weather-ready", {
