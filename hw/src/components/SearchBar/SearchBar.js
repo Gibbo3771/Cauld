@@ -20,7 +20,6 @@ export default class SearchBar extends Component {
   }
 
   render = () => {
-    console.log("searchbar render", this.state);
     return html`
       <input
         id="search"
@@ -29,6 +28,7 @@ export default class SearchBar extends Component {
         autocomplete="off"
         placeholder="Enter city or zipcode"
         .value=${this.state.input}
+        @input=${evt => this.requestLocations(evt)}
       />
       ${this.crossButton.render()}
     `;
@@ -36,7 +36,7 @@ export default class SearchBar extends Component {
 
   requestLocations = evt => {
     this.setState({ input: evt.target.value });
-    if (this.input.value.length < 2) return;
+    if (this.state.input < 2) return;
     evt.preventDefault();
     publish("SearchBar:search", { location: evt.target.value });
   };
@@ -76,16 +76,13 @@ export default class SearchBar extends Component {
   };
 
   handleCrossClick = () => {
-    this.setState({ input: "fucker" });
-    // this.clearLocationList();
+    this.setState({ input: "" });
+    this.clearLocationList();
   };
 
   bindEvents = () => {
     subscribe("App:locations-ready", data => {
       this.updateLocationList(data.detail.locations);
-    });
-    subscribe("CrossButton:clear-search", data => {
-      this.input.value = "";
     });
   };
 }
