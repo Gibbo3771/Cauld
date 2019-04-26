@@ -33,6 +33,7 @@ export default class SinglePageApp extends Component {
   };
 
   componentStateChanged = component => {
+    this.render();
     component.componentDidUpdate();
   };
 

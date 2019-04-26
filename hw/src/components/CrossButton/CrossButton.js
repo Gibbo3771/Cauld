@@ -14,18 +14,21 @@ export default class CrossButton extends Component {
       "fa-times": true,
       "button-cross": true
     };
+    const { onClick } = this.props.onClick;
     return html`
-      <div id="button-cross" class=${classMap(classes)} type="submit"></div>
+      <div
+        id="button-cross"
+        class=${classMap(classes)}
+        type="submit"
+        @click=${() => onClick()}
+      ></div>
     `;
   };
 
-  onClick = () => {
-    publish("CrossButton:clear-search");
-  };
-
-  componentDidMount() {
-    document
-      .getElementById("button-cross")
-      .addEventListener("click", this.onClick);
-  }
+  // componentDidMount() {
+  //   const { onClick } = this.props;
+  //   document
+  //     .getElementById("button-cross")
+  //     .addEventListener("click", () => onClick());
+  // }
 }

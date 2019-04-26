@@ -1,19 +1,26 @@
 import Component from "../Component";
+import CrossButton from "../../components/CrossButton/CrossButton";
 import { publish, subscribe } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.props = props;
-    // this.input = document.getElementById("search");
-    // this.input.addEventListener("input", this.requestLocations);
+    this.crossButton = new CrossButton({ onClick: this.handleCrossClick });
+    this.state = {
+      input: ""
+    };
+  }
+
+  componentDidMount() {
+    this.input = document.getElementById("search");
+    this.input.addEventListener("input", this.requestLocations);
     // this.input.addEventListener("focus", this.requestLocations);
     // this.input.addEventListener("click", this.requestLocations);
-    this.bindEvents();
   }
 
   render = () => {
+    console.log("searchbar render", this.state);
     return html`
       <input
         id="search"
@@ -21,11 +28,14 @@ export default class SearchBar extends Component {
         type="text"
         autocomplete="off"
         placeholder="Enter city or zipcode"
+        .value=${this.state.input}
       />
+      ${this.crossButton.render()}
     `;
   };
 
   requestLocations = evt => {
+    this.setState({ input: evt.target.value });
     if (this.input.value.length < 2) return;
     evt.preventDefault();
     publish("SearchBar:search", { location: evt.target.value });
@@ -65,13 +75,17 @@ export default class SearchBar extends Component {
     publish("SearchBar:location-selected", { location: text });
   };
 
+  handleCrossClick = () => {
+    this.setState({ input: "fucker" });
+    // this.clearLocationList();
+  };
+
   bindEvents = () => {
     subscribe("App:locations-ready", data => {
       this.updateLocationList(data.detail.locations);
     });
     subscribe("CrossButton:clear-search", data => {
       this.input.value = "";
-      this.clearLocationList();
     });
   };
 }
