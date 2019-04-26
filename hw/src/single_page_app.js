@@ -1,5 +1,5 @@
 import { publish, subscribe } from "./helpers/pub_sub";
-import WeatherAPI from "./helpers/weather_api";
+import WeatherAPI from "./helpers/WeatherAPI";
 import API_KEY from "../keystore";
 import MainView from "./views/main_view/MainView";
 import SearchBar from "./components/SearchBar/SearchBar";

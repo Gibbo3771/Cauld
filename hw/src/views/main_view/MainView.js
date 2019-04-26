@@ -1,15 +1,11 @@
 import View from "../View";
-import WeatherAPI from "../../helpers/weather_api";
-import API_KEY from "../../../keystore";
-import { publish, subscribe } from "../../helpers/pub_sub";
-import TodayView from "../weather_forecast_views/TodayView";
+import { subscribe } from "../../helpers/pub_sub";
 import ForecastDayView from "../weather_forecast_views/ForecastDayView";
 
 export default class MainView extends View {
   constructor(props) {
     super(props);
     this.parent = document.getElementById("main-view");
-    this.weather = new WeatherAPI({ apiKey: API_KEY });
     subscribe("App:weather-ready", this.render);
     this.renderDelayMillis = 50;
   }
