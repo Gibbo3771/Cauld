@@ -4,10 +4,10 @@ import { html } from "lit-html";
 export default class SearchBar {
   constructor(props) {
     this.props = props;
-    this.input = document.getElementById("search");
-    this.input.addEventListener("input", this.requestLocations);
-    this.input.addEventListener("focus", this.requestLocations);
-    this.input.addEventListener("click", this.requestLocations);
+    // this.input = document.getElementById("search");
+    // this.input.addEventListener("input", this.requestLocations);
+    // this.input.addEventListener("focus", this.requestLocations);
+    // this.input.addEventListener("click", this.requestLocations);
     this.bindEvents();
   }
 

@@ -6,6 +6,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import CrossButton from "./components/CrossButton/CrossButton";
 import SingleDayForecast from "./models/single_day_forecast";
 import CurrentWeather from "./models/current_weather";
+import { render } from "lit-html";
 
 export default class SinglePageApp {
   constructor() {
@@ -14,9 +15,11 @@ export default class SinglePageApp {
     this.bindEvents();
     this.weather = new WeatherAPI({ apiKey: API_KEY });
     this.mainView = new MainView({ root: this.root });
-    this.crossButton = new CrossButton({ root: this.root });
-    this.searchBar = new SearchBar({ root: this.root });
   }
+
+  render = () => {
+    render(this.mainView.render(), this.root);
+  };
 
   locationSearch = data => {
     this.weather.search(data.detail.location, response => {

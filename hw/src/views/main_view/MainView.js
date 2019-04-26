@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { subscribe } from "../../helpers/pub_sub";
 import ForecastDayView from "../weather_forecast_views/ForecastDayView";
 import AppHeader from "../../components/AppHeader/AppHeader";
+import CrossButton from "../../components/CrossButton/CrossButton";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 export default class MainView extends View {
@@ -10,7 +11,7 @@ export default class MainView extends View {
     super(props);
     this.parent = document.getElementById("main-view");
     this.searchBar = new SearchBar({ root: this.root });
-
+    this.crossButton = new CrossButton({ root: this.root });
     subscribe("App:weather-ready", this.render);
     this.renderDelayMillis = 50;
   }
@@ -18,23 +19,20 @@ export default class MainView extends View {
   render = data => {
     const markup = html`
       <div id="main-view">
-        ${AppHeader()}
+        ${AppHeader("Weather")}
+        <div id="autocomplete" class="autocomplete">
+          ${this.searchBar.render()} ${this.crossButton.render()}
+        </div>
+        <div id="forecast" class="weather"></div>
       </div>
     `;
-    const d = data.detail.forecast;
-    const today = new ForecastDayView({
-      root: this.props.root,
-      isToday: true,
-      current: data.detail.current,
-      forecast: d[0]
-    });
+    return markup;
 
-    this.renderDelay(this.renderDelayMillis, today.render);
-
-    for (let i = 1; i < d.length; i++) {
+    for (let i = 0; i < d.length; i++) {
       const day = new ForecastDayView({
         root: this.props.root,
-        isToday: false,
+        isToday: i === 0 ? true : false,
+        current: data.detail.current,
         forecast: d[i]
       });
       this.renderDelay(i * this.renderDelayMillis, day.render);
@@ -47,4 +45,6 @@ export default class MainView extends View {
       callback();
     }, milliseconds);
   };
+
+  renderForecastDay = () => {};
 }
