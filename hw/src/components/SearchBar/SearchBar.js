@@ -1,5 +1,6 @@
 import Component from "../Component";
 import CrossButton from "../../components/CrossButton/CrossButton";
+import List from "../List/List";
 import { publish, subscribe } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 
@@ -7,38 +8,50 @@ export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.crossButton = new CrossButton({ onClick: this.handleCrossClick });
+    this.list = new List();
     this.state = {
       input: ""
     };
   }
 
-  componentDidMount() {
-    this.input = document.getElementById("search");
-    this.input.addEventListener("input", this.requestLocations);
-    // this.input.addEventListener("focus", this.requestLocations);
-    // this.input.addEventListener("click", this.requestLocations);
-  }
-
-  render = () => {
+  render = props => {
     return html`
-      <input
-        id="search"
-        class="input"
-        type="text"
-        autocomplete="off"
-        placeholder="Enter city or zipcode"
-        .value=${this.state.input}
-        @input=${evt => this.requestLocations(evt)}
-      />
-      ${this.crossButton.render()}
+      <div
+        id="autocomplete"
+        class="autocomplete"
+        @mouseleave=${() => this.clearLocationList()}
+      >
+        <input
+          id="search"
+          class="input"
+          type="text"
+          autocomplete="off"
+          placeholder="Enter city or zipcode"
+          .value=${this.state.input}
+          @input=${evt => this.requestLocations(evt)}
+          @focus=${evt => this.requestLocations(evt)}
+          @click=${evt => this.requestLocations(evt)}
+        />
+        ${this.crossButton.render()} ${new List(props).render()}
+      </div>
     `;
   };
 
+  onInputChange = evt => {
+    this.requestLocations(evt);
+  };
+
+  onFocus = () => {};
+
+  onClick = () => {};
+
   requestLocations = evt => {
     this.setState({ input: evt.target.value });
-    if (this.state.input < 2) return;
+    const { input } = this.state;
+    if (input < 2) return;
     evt.preventDefault();
-    publish("SearchBar:search", { location: evt.target.value });
+    const { locationSearch } = this.props;
+    locationSearch(input);
   };
 
   updateLocationList = locations => {
@@ -70,7 +83,7 @@ export default class SearchBar extends Component {
   selectLocation = evt => {
     publish("App:clear");
     const text = evt.target.innerText;
-    this.input.value = text;
+    this.setState({ input: text });
     this.clearLocationList();
     publish("SearchBar:location-selected", { location: text });
   };
@@ -78,11 +91,5 @@ export default class SearchBar extends Component {
   handleCrossClick = () => {
     this.setState({ input: "" });
     this.clearLocationList();
-  };
-
-  bindEvents = () => {
-    subscribe("App:locations-ready", data => {
-      this.updateLocationList(data.detail.locations);
-    });
   };
 }
