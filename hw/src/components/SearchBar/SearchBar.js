@@ -7,19 +7,21 @@ import { html } from "lit-html";
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.crossButton = new CrossButton({ onClick: this.handleCrossClick });
+    this.crossButton = new CrossButton({ onClick: this.onCrossClick });
     this.list = new List();
     this.state = {
+      autoCompleteVisible: false,
       input: ""
     };
   }
 
   render = props => {
+    super.render(props);
     return html`
       <div
         id="autocomplete"
         class="autocomplete"
-        @mouseleave=${() => this.clearLocationList()}
+        @mouseleave=${() => this.onMouseLeave()}
       >
         <input
           id="search"
@@ -28,68 +30,47 @@ export default class SearchBar extends Component {
           autocomplete="off"
           placeholder="Enter city or zipcode"
           .value=${this.state.input}
-          @input=${evt => this.requestLocations(evt)}
-          @focus=${evt => this.requestLocations(evt)}
-          @click=${evt => this.requestLocations(evt)}
+          @input=${evt => this.onInputChange(evt)}
+          @mouseenter=${evt => this.onMouseEnter(evt)}
+          @click=${evt => this.onClick(evt)}
         />
-        ${this.crossButton.render()} ${new List(props).render()}
+        ${this.crossButton.render()}
+        ${this.list.render({ ...this.state, ...props })}
       </div>
     `;
   };
 
   onInputChange = evt => {
-    this.requestLocations(evt);
-  };
-
-  onFocus = () => {};
-
-  onClick = () => {};
-
-  requestLocations = evt => {
-    this.setState({ input: evt.target.value });
+    this.setState({ autoCompleteVisible: true });
+    this.setInputValue(evt.target.value);
     const { input } = this.state;
     if (input < 2) return;
     evt.preventDefault();
-    const { locationSearch } = this.props;
-    locationSearch(input);
+    const { onInputChange } = this.props;
+    onInputChange(input);
   };
 
-  updateLocationList = locations => {
-    this.clearLocationList();
-    const auto = document.getElementById("autocomplete");
-    auto.addEventListener("mouseleave", this.clearLocationList);
-    const container = document.createElement("div");
-    container.setAttribute("id", "autocomplete-items");
-    container.setAttribute("class", "autocomplete-items");
-    auto.appendChild(container);
-    for (const location of locations.data) {
-      const item = document.createElement("div");
-      item.innerHTML = location.name;
-      container.appendChild(item);
-      item.addEventListener("click", this.selectLocation);
-    }
+  onMouseEnter = () => {
+    this.setState({ autoCompleteVisible: true });
   };
 
-  clearLocationList = () => {
-    const auto = document.getElementById("autocomplete");
-    for (const child of auto.children) {
-      if (child.id === "autocomplete-items") {
-        auto.removeChild(child);
-        break;
-      }
-    }
+  onClick = () => {
+    this.setState({ autoCompleteVisible: true });
   };
 
-  selectLocation = evt => {
-    publish("App:clear");
-    const text = evt.target.innerText;
-    this.setState({ input: text });
-    this.clearLocationList();
-    publish("SearchBar:location-selected", { location: text });
+  onMouseLeave = () => {
+    this.setState({ autoCompleteVisible: false });
   };
 
-  handleCrossClick = () => {
+  clearLocationList = () => {};
+
+  setInputValue = value => {
+    this.setState({ input: value });
+  };
+
+  onCrossClick = () => {
     this.setState({ input: "" });
-    this.clearLocationList();
+    console.log(this.props);
+    this.props.onCrossClick();
   };
 }

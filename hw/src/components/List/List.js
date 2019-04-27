@@ -7,24 +7,27 @@ export default class List extends Component {
     super(props);
   }
 
-  render() {
-    const { locations } = this.props;
+  render(props) {
+    const { autoCompleteVisible } = props;
+    if (!autoCompleteVisible) return;
     return html`
       <div id="container" class="autocomplete-items">
-        ${this.createItems()}
+        ${this.createItems(props)}
       </div>
     `;
   }
 
-  createItems = () => {
-    const { locations } = this.props;
-    if (!locations) return;
-    let markup = html``;
+  createItems = props => {
+    const { locations, onItemClick } = props;
+    const items = [];
     locations.forEach(location => {
-      console.log(location.name);
-      markup += new ListItem({ location: location }).render();
+      items.push(
+        new ListItem({
+          location: location,
+          onItemClick: onItemClick
+        }).render()
+      );
     });
-    console.log(markup);
-    return markup;
+    return items;
   };
 }

@@ -7,14 +7,21 @@ export default class Component {
     publish("Component:created", this);
   }
 
-  render() {}
+  render(props) {
+    this.props = { ...this.props, ...props };
+  }
 
   componentDidMount() {}
 
   componentDidUpdate() {}
 
   setState(newState) {
-    this.state = newState;
-    publish("Component:state-changed", this);
+    const prevState = { ...this.state };
+    this.state = { ...this.state, ...newState };
+    publish("Component:state-changed", {
+      component: this,
+      newState: newState,
+      prevState: prevState
+    });
   }
 }

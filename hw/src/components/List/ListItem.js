@@ -7,9 +7,11 @@ export default class ListItem extends Component {
   }
 
   render() {
-    const { onClick, location } = this.props;
+    const { onItemClick, location } = this.props;
     return html`
-      <div @click=${() => onClick()}>${location.name}</div>
+      <div @click=${() => onItemClick(location)}>
+        ${location.name}
+      </div>
     `;
   }
 }

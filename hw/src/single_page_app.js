@@ -24,9 +24,10 @@ export default class SinglePageApp {
     });
   };
 
-  componentStateChanged = component => {
+  componentStateChanged = object => {
+    const { component, prevState, newState } = object;
     this.render();
-    component.componentDidUpdate();
+    component.componentDidUpdate(prevState, newState);
   };
 
   bindEvents = () => {

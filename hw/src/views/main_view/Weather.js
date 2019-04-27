@@ -11,17 +11,25 @@ export default class Weather extends Component {
   constructor(props) {
     super(props);
     this.weather = new WeatherAPI({ apiKey: API_KEY });
-    this.searchBar = new SearchBar({ locationSearch: this.locationSearch });
+    this.searchBar = new SearchBar({
+      onInputChange: this.locationSearch,
+      onLocationSelected: this.getWeatherForecast
+    });
     this.renderDelayMillis = 50;
     this.state = {
-      locations: ""
+      locations: []
     };
   }
 
   render = data => {
     const markup = html`
       <div id="main-view">
-        ${AppHeader("Weather")} ${this.searchBar.render(this.state)}
+        ${AppHeader("Weather")}
+        ${this.searchBar.render({
+          ...this.state,
+          onItemClick: this.getWeatherForecast,
+          onCrossClick: this.handleCrossClick
+        })}
         <div id="forecast" class="weather"></div>
       </div>
     `;
@@ -54,7 +62,7 @@ export default class Weather extends Component {
   };
 
   getWeatherForecast = location => {
-    this.weather.forecast(location, 7, response => {
+    this.weather.forecast(location.name, 7, response => {
       const { current, forecast } = response.data;
       const currentWeather = new CurrentWeather(response.data);
       const forecastDays = [];
@@ -66,5 +74,13 @@ export default class Weather extends Component {
         forecast: forecastDays
       });
     });
+  };
+
+  handleCrossClick = () => {
+    this.clearLocations();
+  };
+
+  clearLocations = () => {
+    this.setState({ locations: [] });
   };
 }
