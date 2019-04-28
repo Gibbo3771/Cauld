@@ -17,10 +17,12 @@ export default class SinglePageApp {
   };
 
   componentsMounted = () => {
+    console.log("before delete", this.components.length);
     this.components.forEach(component => {
       component.componentDidMount();
     });
     this.components = [];
+    console.log("after delete", this.components.length);
   };
 
   componentStateChanged = object => {
@@ -30,17 +32,6 @@ export default class SinglePageApp {
   };
 
   bindEvents = () => {
-    subscribe("SearchBar:search", data => {
-      this.locationSearch(data);
-    });
-    subscribe("SearchBar:location-selected", data => {
-      this.getWeatherForecast(data.detail.location);
-    });
-    subscribe("App:clear", () => {
-      const e = document.getElementById("forecast");
-      e.innerHTML = "";
-      e.classList.remove("blue");
-    });
     subscribe("Component:created", evt => {
       this.components.push(evt.detail);
     });

@@ -1,6 +1,6 @@
 import Component from "../Component";
 import { html } from "lit-html";
-import ListItem from "./ListItem";
+import { ListItem } from "./ListItem";
 
 export default class List extends Component {
   constructor(props) {
@@ -22,10 +22,10 @@ export default class List extends Component {
     const items = [];
     locations.forEach(location => {
       items.push(
-        new ListItem({
+        ListItem({
           location: location,
           onItemClick: onItemClick
-        }).render()
+        })
       );
     });
     return items;
