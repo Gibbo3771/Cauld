@@ -30,9 +30,9 @@ export default class SearchBar extends Component {
           autocomplete="off"
           placeholder="Enter city or zipcode"
           .value=${this.state.input}
-          @input=${evt => this.onInputChange(evt)}
-          @mouseenter=${evt => this.onMouseEnter(evt)}
-          @click=${evt => this.onClick(evt)}
+          @input=${this.onInputChange}
+          @mouseenter=${this.onMouseEnter}
+          @click=${this.onClick}
         />
         ${this.crossButton.render()}
         ${this.list.render({ ...this.state, ...this.props })}
