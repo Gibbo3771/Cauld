@@ -1,6 +1,7 @@
 import { html } from "lit-html";
 import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
+import { getClientIP } from "../../helpers/IPHelper";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
 import { Forecast } from "../Forecast/Forecast";

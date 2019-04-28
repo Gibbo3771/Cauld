@@ -4,6 +4,7 @@ import { render } from "lit-html";
 
 export default class SinglePageApp {
   constructor() {
+    this.bindEvents();
     // This is set to 16.66ms as this is roughly on par
     // with what a person can see, basically 60fps
     this.batchUpdateInterval = 16.66;
@@ -11,7 +12,6 @@ export default class SinglePageApp {
     this.components = [];
     // State changes are batched and executed to save render calls
     this.batchedStateChanges = [];
-    this.bindEvents();
     this.weather = new Weather();
   }
 
