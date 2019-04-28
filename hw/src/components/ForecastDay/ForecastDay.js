@@ -38,7 +38,7 @@ export const ForecastDay = props => {
 };
 
 const renderHeader = props => {
-  const { date, descriptor } = props.forecast;
+  const { date } = props.forecast;
   return html`
     <h1>${getDayString(new Date(date).getDay())}</h1>
     <h3>${prettyDateParse(new Date(date)).descriptor}</h3>

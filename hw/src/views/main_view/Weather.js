@@ -34,7 +34,7 @@ export default class Weather extends Component {
         ${AppHeader("Weather")}
         ${this.searchBar.render({
           ...this.state,
-          onItemClick: this.getWeatherForecast,
+          onLocationSelected: this.getWeatherForecast,
           onCrossClick: this.handleCrossClick
         })}
         ${this.forecast.render({ ...this.state.weather })}

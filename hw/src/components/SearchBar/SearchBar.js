@@ -17,6 +17,7 @@ export default class SearchBar extends Component {
 
   render = props => {
     super.render(props);
+    const { weather, locations } = this.props;
     return html`
       <div
         id="autocomplete"
@@ -35,9 +36,20 @@ export default class SearchBar extends Component {
           @click=${this.onClick}
         />
         ${this.crossButton.render()}
-        ${this.list.render({ ...this.state, ...this.props })}
+        ${this.list.render({
+          ...this.state,
+          onLocationSelected: this.onLocationSelected,
+          weather: weather,
+          locations: locations
+        })}
       </div>
     `;
+  };
+
+  onLocationSelected = location => {
+    const { onLocationSelected } = this.props;
+    this.setInputValue(location.name);
+    onLocationSelected(location);
   };
 
   onInputChange = evt => {

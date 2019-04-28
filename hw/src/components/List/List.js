@@ -18,13 +18,13 @@ export default class List extends Component {
   }
 
   createItems = props => {
-    const { locations, onItemClick } = props;
+    const { locations, onLocationSelected } = props;
     const items = [];
     locations.forEach(location => {
       items.push(
         ListItem({
           location: location,
-          onItemClick: onItemClick
+          onLocationSelected: onLocationSelected
         })
       );
     });
