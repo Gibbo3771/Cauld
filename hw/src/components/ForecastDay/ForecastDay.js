@@ -1,4 +1,3 @@
-import View from "../../views/View";
 import {
   getMonthString,
   getDayString,
@@ -12,49 +11,52 @@ import Component from "../Component";
 export default class ForecastDay extends Component {
   constructor(props) {
     super(props);
-    this.parent = document.getElementById("forecast");
-    this.day = document.createElement("div");
-    this.appendChild(this.day);
-    this.day.classList.add("blue");
-    this.bindEvents();
   }
 
-  render = () => {
+  render = props => {
+    super.render(props);
     const { date } = this.props.forecast;
     const { isToday } = this.props;
-    this.day.id = `forecast-${date}`;
+    const classes = {
+      blue: isToday
+    };
     const markup = html`
-      <div id="header">
-        <div>
-          ${this.renderHeader()}
+      <div>
+        <div id="header">
+          <div>
+            ${this.renderHeader()}
+          </div>
+        </div>
+        ${this.renderCurrentTemp()}
+        <div class="icon">
+          ${this.renderIcon()}
+        </div>
+        <div class="weather-descriptor">
+          ${this.renderWeatherDescriptor()}
+        </div>
+        <span class="temperature-range" }>
+          ${this.renderTempRange()}
+        </span>
+        <div class="wind">
+          ${isToday ? this.renderWind() : this.renderWindMax()}
         </div>
       </div>
-      ${this.renderCurrentTemp()}
-      <div class="icon">
-        ${this.renderIcon()}
-      </div>
-      <div class="weather-descriptor">
-        ${this.renderWeatherDescriptor()}
-      </div>
-      <span class="temperature-range" }>
-        ${this.renderTempRange()}
-      </span>
-      <div class="wind">
-        ${isToday ? this.renderWind() : this.renderWindMax()}
-      </div>
     `;
-    render(markup, this.day);
+    return markup;
   };
 
   renderHeader = () => {
-    const { date, desciptor } = this.props.forecast;
+    console.log("header");
+    const { date, descriptor } = this.props.forecast;
     return html`
       <h1>${getDayString(new Date(date).getDay())}</h1>
-      <h3>${prettyDateParse(new Date(date)).desciptor}</h3>
+      <h3>${prettyDateParse(new Date(date)).descriptor}</h3>
     `;
   };
 
   renderIcon = () => {
+    console.log("icon");
+
     const { icon } = this.props.forecast;
     return html`
       <img src="http:${icon}" />
@@ -62,6 +64,8 @@ export default class ForecastDay extends Component {
   };
 
   renderWeatherDescriptor = () => {
+    console.log("desc");
+
     const { descriptor } = this.props.forecast;
     return html`
       <p>${descriptor}</p>
@@ -69,6 +73,8 @@ export default class ForecastDay extends Component {
   };
 
   renderTempRange = () => {
+    console.log("temp range");
+
     const { minTempC, maxTempC } = this.props.forecast;
     const classes = {
       "temperature-range": true
@@ -79,6 +85,8 @@ export default class ForecastDay extends Component {
   };
 
   renderCurrentTemp = () => {
+    console.log("current temp");
+
     const { isToday } = this.props;
     if (!isToday) return;
     const { tempC } = this.props.current;
@@ -93,6 +101,8 @@ export default class ForecastDay extends Component {
   };
 
   renderWind = () => {
+    console.log("wind");
+
     const { windMPH } = this.props.current;
     return html`
       <h4>Wind</h4>
@@ -101,12 +111,12 @@ export default class ForecastDay extends Component {
   };
 
   renderWindMax = () => {
+    console.log("wind max");
+
     const { maxWindMPH } = this.props.forecast;
     return html`
       <h4>Wind Max</h4>
       <p>${maxWindMPH}mph</p>
     `;
   };
-
-  bindEvents = () => {};
 }

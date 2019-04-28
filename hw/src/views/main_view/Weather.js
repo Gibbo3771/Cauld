@@ -4,7 +4,7 @@ import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
-import ForecastDay from "../../components/ForecastDay/ForecastDay";
+import Forecast from "../../components/Forecast/Forecast";
 import Component from "../../components/Component";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -17,10 +17,11 @@ export default class Weather extends Component {
       onInputChange: this.locationSearch,
       onLocationSelected: this.getWeatherForecast
     });
-    this.renderDelayMillis = 50;
+    this.forecast = new Forecast();
     this.state = {
       locations: [],
       weather: {
+        available: false,
         current: null,
         forecast: []
       }
@@ -28,8 +29,7 @@ export default class Weather extends Component {
   }
 
   render = data => {
-    const { current, forecast } = this.state.weather;
-    const markup = html`
+    return html`
       <div id="main-view">
         ${AppHeader("Weather")}
         ${this.searchBar.render({
@@ -37,38 +37,10 @@ export default class Weather extends Component {
           onItemClick: this.getWeatherForecast,
           onCrossClick: this.handleCrossClick
         })}
-        <div id="forecast" class="weather">
-          ${current
-            ? new ForecastDay({
-                current: current,
-                forecast: forecast[0],
-                isToday: true
-              }).render()
-            : ``}
-        </div>
+        ${this.forecast.render({ ...this.state.weather })}
       </div>
     `;
-    return markup;
-
-    for (let i = 0; i < d.length; i++) {
-      const day = new ForecastDayView({
-        root: this.props.root,
-        isToday: i === 0 ? true : false,
-        current: data.detail.current,
-        forecast: d[i]
-      });
-      this.renderDelay(i * this.renderDelayMillis, day.render);
-    }
   };
-
-  renderDelay = (milliseconds, callback) => {
-    const id = setInterval(() => {
-      clearInterval(id);
-      callback();
-    }, milliseconds);
-  };
-
-  renderForecastDay = () => {};
 
   locationSearch = location => {
     this.weather.search(location, response => {
@@ -86,6 +58,7 @@ export default class Weather extends Component {
       }
       this.setState({
         weather: {
+          available: true,
           current: currentWeather,
           forecast: forecastDays
         }

@@ -3,7 +3,6 @@ import { publish } from "../helpers/pub_sub";
 export default class Component {
   constructor(props) {
     this.props = props;
-    this.mounted = false;
     publish("Component:created", this);
   }
 

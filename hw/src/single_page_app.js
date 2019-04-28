@@ -12,15 +12,15 @@ export default class SinglePageApp {
 
   render = () => {
     render(this.weather.render(), this.root);
+    if (this.components.length === 0) return;
     this.componentsMounted();
   };
 
   componentsMounted = () => {
     this.components.forEach(component => {
-      if (component.mounted) return;
-      component.mounted = true;
       component.componentDidMount();
     });
+    this.components = [];
   };
 
   componentStateChanged = object => {
