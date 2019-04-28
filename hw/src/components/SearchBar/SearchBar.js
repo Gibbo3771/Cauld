@@ -62,15 +62,12 @@ export default class SearchBar extends Component {
     this.setState({ autoCompleteVisible: false });
   };
 
-  clearLocationList = () => {};
-
   setInputValue = value => {
     this.setState({ input: value });
   };
 
   onCrossClick = () => {
     this.setState({ input: "" });
-    console.log(this.props);
     this.props.onCrossClick();
   };
 }

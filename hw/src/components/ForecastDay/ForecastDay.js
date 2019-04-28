@@ -18,10 +18,11 @@ export default class ForecastDay extends Component {
     const { date } = this.props.forecast;
     const { isToday } = this.props;
     const classes = {
-      blue: isToday
+      blue: true,
+      "current-day": isToday
     };
     const markup = html`
-      <div>
+      <div class=${classMap(classes)}>
         <div id="header">
           <div>
             ${this.renderHeader()}
@@ -46,7 +47,7 @@ export default class ForecastDay extends Component {
   };
 
   renderHeader = () => {
-    console.log("header");
+    ("header");
     const { date, descriptor } = this.props.forecast;
     return html`
       <h1>${getDayString(new Date(date).getDay())}</h1>
@@ -55,8 +56,6 @@ export default class ForecastDay extends Component {
   };
 
   renderIcon = () => {
-    console.log("icon");
-
     const { icon } = this.props.forecast;
     return html`
       <img src="http:${icon}" />
@@ -64,8 +63,6 @@ export default class ForecastDay extends Component {
   };
 
   renderWeatherDescriptor = () => {
-    console.log("desc");
-
     const { descriptor } = this.props.forecast;
     return html`
       <p>${descriptor}</p>
@@ -73,8 +70,6 @@ export default class ForecastDay extends Component {
   };
 
   renderTempRange = () => {
-    console.log("temp range");
-
     const { minTempC, maxTempC } = this.props.forecast;
     const classes = {
       "temperature-range": true
@@ -85,8 +80,6 @@ export default class ForecastDay extends Component {
   };
 
   renderCurrentTemp = () => {
-    console.log("current temp");
-
     const { isToday } = this.props;
     if (!isToday) return;
     const { tempC } = this.props.current;
@@ -101,8 +94,6 @@ export default class ForecastDay extends Component {
   };
 
   renderWind = () => {
-    console.log("wind");
-
     const { windMPH } = this.props.current;
     return html`
       <h4>Wind</h4>
@@ -111,8 +102,6 @@ export default class ForecastDay extends Component {
   };
 
   renderWindMax = () => {
-    console.log("wind max");
-
     const { maxWindMPH } = this.props.forecast;
     return html`
       <h4>Wind Max</h4>

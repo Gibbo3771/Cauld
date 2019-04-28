@@ -11,7 +11,13 @@ export default class Forecast extends Component {
     const days = this.createForecastDays();
     return html`
       <div id="forecast" class="weather">
-        ${repeat(days, (day, index) => day.render())}
+        ${repeat(days, (day, index) =>
+          day.render({
+            current: this.props.current,
+            forecast: this.props.forecast[index],
+            isToday: index === 0
+          })
+        )}
       </div>
     `;
   }

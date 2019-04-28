@@ -63,6 +63,7 @@ export default class Weather extends Component {
           forecast: forecastDays
         }
       });
+      this.clearLocations();
     });
   };
 

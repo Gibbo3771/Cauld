@@ -49,7 +49,7 @@ const date = date => {
 
 const buildPrettyDateObject = (descriptor, date) => {
   return {
-    desciptor: descriptor,
+    descriptor: descriptor,
     date: date
   };
 };
