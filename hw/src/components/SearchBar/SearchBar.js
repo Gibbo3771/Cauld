@@ -35,7 +35,7 @@ export default class SearchBar extends Component {
           @click=${evt => this.onClick(evt)}
         />
         ${this.crossButton.render()}
-        ${this.list.render({ ...this.state, ...props })}
+        ${this.list.render({ ...this.state, ...this.props })}
       </div>
     `;
   };

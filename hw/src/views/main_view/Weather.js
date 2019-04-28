@@ -2,6 +2,8 @@ import { html } from "lit-html";
 import { subscribe } from "../../helpers/pub_sub";
 import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
+import CurrentWeather from "../../models/current_weather";
+import SingleDayForecast from "../../models/single_day_forecast";
 import ForecastDayView from "../weather_forecast_views/ForecastDayView";
 import Component from "../../components/Component";
 import AppHeader from "../../components/AppHeader/AppHeader";
@@ -17,11 +19,16 @@ export default class Weather extends Component {
     });
     this.renderDelayMillis = 50;
     this.state = {
-      locations: []
+      locations: [],
+      weather: {
+        current: [],
+        forecast: []
+      }
     };
   }
 
   render = data => {
+    console.log(this.state);
     const markup = html`
       <div id="main-view">
         ${AppHeader("Weather")}
@@ -63,15 +70,17 @@ export default class Weather extends Component {
 
   getWeatherForecast = location => {
     this.weather.forecast(location.name, 7, response => {
-      const { current, forecast } = response.data;
+      const { forecast } = response.data;
       const currentWeather = new CurrentWeather(response.data);
       const forecastDays = [];
       for (const day of forecast.forecastday) {
         forecastDays.push(new SingleDayForecast(day));
       }
-      publish("App:weather-ready", {
-        current: currentWeather,
-        forecast: forecastDays
+      this.setState({
+        weather: {
+          current: currentWeather,
+          forecast: forecastDays
+        }
       });
     });
   };

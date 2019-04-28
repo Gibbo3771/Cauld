@@ -1,4 +1,3 @@
-import Component from "./components/Component";
 import { publish, subscribe } from "./helpers/pub_sub";
 import Weather from "./views/main_view/Weather";
 import { render } from "lit-html";
