@@ -1,13 +1,12 @@
 import { html } from "lit-html";
-import { subscribe } from "../../helpers/pub_sub";
 import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
-import { Forecast } from "../../components/Forecast/Forecast";
-import Component from "../../components/Component";
-import AppHeader from "../../components/AppHeader/AppHeader";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import { Forecast } from "../Forecast/Forecast";
+import Component from "../Component";
+import AppHeader from "../AppHeader/AppHeader";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default class Weather extends Component {
   constructor(props) {

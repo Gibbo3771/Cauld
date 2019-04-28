@@ -1,5 +1,5 @@
-import { publish, subscribe } from "./helpers/pub_sub";
-import Weather from "./views/main_view/Weather";
+import { subscribe } from "./helpers/pub_sub";
+import Weather from "./components/Weather/Weather";
 import { render } from "lit-html";
 
 export default class SinglePageApp {
