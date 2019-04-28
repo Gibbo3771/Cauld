@@ -4,7 +4,7 @@ import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
-import Forecast from "../../components/Forecast/Forecast";
+import { Forecast } from "../../components/Forecast/Forecast";
 import Component from "../../components/Component";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -17,7 +17,6 @@ export default class Weather extends Component {
       onInputChange: this.locationSearch,
       onLocationSelected: this.getWeatherForecast
     });
-    this.forecast = new Forecast();
     this.state = {
       locations: [],
       weather: {
@@ -37,7 +36,7 @@ export default class Weather extends Component {
           onLocationSelected: this.getWeatherForecast,
           onCrossClick: this.handleCrossClick
         })}
-        ${this.forecast.render({ ...this.state.weather })}
+        ${Forecast({ ...this.state.weather })}
       </div>
     `;
   };
