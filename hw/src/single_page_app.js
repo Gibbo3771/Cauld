@@ -6,6 +6,7 @@ export default class SinglePageApp {
   constructor() {
     this.root = document.getElementById("root");
     this.components = [];
+    this.batchedStateUpdates = [];
     this.bindEvents();
     this.weather = new Weather();
   }
@@ -17,17 +18,14 @@ export default class SinglePageApp {
   };
 
   componentsMounted = () => {
-    console.log("before delete", this.components.length);
     this.components.forEach(component => {
       component.componentDidMount();
     });
     this.components = [];
-    console.log("after delete", this.components.length);
   };
 
   componentStateChanged = object => {
     const { component, prevState, newState } = object;
-    this.render();
     component.componentDidUpdate(prevState, newState);
   };
 
@@ -36,6 +34,17 @@ export default class SinglePageApp {
       this.components.push(evt.detail);
     });
     subscribe("Component:state-changed", evt => {
+      if (this.batchedStateUpdates.length > 0) {
+        let id = setInterval(() => {
+          this.batchedStateUpdates.forEach(object => {
+            this.componentStateChanged(object);
+          });
+          this.batchedStateUpdates = [];
+          this.render();
+          clearInterval(id);
+        }, 3);
+      }
+      this.batchedStateUpdates.push(evt.detail);
       this.componentStateChanged(evt.detail);
     });
   };

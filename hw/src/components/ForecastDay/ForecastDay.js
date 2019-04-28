@@ -17,7 +17,9 @@ export const ForecastDay = props => {
           ${renderHeader(props)}
         </div>
       </div>
-      ${renderCurrentTemp(props)}
+      <div class="temp-current">
+        ${renderCurrentTemp(props)}
+      </div>
       <div class="icon">
         ${renderIcon(props)}
       </div>
@@ -36,7 +38,6 @@ export const ForecastDay = props => {
 };
 
 const renderHeader = props => {
-  ("header");
   const { date, descriptor } = props.forecast;
   return html`
     <h1>${getDayString(new Date(date).getDay())}</h1>
@@ -60,9 +61,6 @@ const renderWeatherDescriptor = props => {
 
 const renderTempRange = props => {
   const { minTempC, maxTempC } = props.forecast;
-  const classes = {
-    "temperature-range": true
-  };
   return html`
     ${minTempC}c°<sub>Lo</sub> ${maxTempC}c°<sub>Hi</sub>
   `;
@@ -72,13 +70,8 @@ const renderCurrentTemp = props => {
   const { isToday } = props;
   if (!isToday) return;
   const { tempC } = props.current;
-  const classes = {
-    "temp-current": true
-  };
   return html`
-    <div class=${classMap(classes)}>
-      <p>${tempC}c°</p>
-    </div>
+    <p>${tempC}c°</p>
   `;
 };
 
