@@ -4,7 +4,7 @@ import API_KEY from "../../../keystore";
 import WeatherAPI from "../../helpers/WeatherAPI";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
-import ForecastDayView from "../weather_forecast_views/ForecastDayView";
+import ForecastDay from "../../components/ForecastDay/ForecastDay";
 import Component from "../../components/Component";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -21,14 +21,14 @@ export default class Weather extends Component {
     this.state = {
       locations: [],
       weather: {
-        current: [],
+        current: null,
         forecast: []
       }
     };
   }
 
   render = data => {
-    console.log(this.state);
+    const { current, forecast } = this.state.weather;
     const markup = html`
       <div id="main-view">
         ${AppHeader("Weather")}
@@ -37,7 +37,15 @@ export default class Weather extends Component {
           onItemClick: this.getWeatherForecast,
           onCrossClick: this.handleCrossClick
         })}
-        <div id="forecast" class="weather"></div>
+        <div id="forecast" class="weather">
+          ${current
+            ? new ForecastDay({
+                current: current,
+                forecast: forecast[0],
+                isToday: true
+              }).render()
+            : ``}
+        </div>
       </div>
     `;
     return markup;
