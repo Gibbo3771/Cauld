@@ -1,5 +1,4 @@
 import Component from "../Component";
-import { publish } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 import { classMap } from "lit-html/directives/class-map";
 

@@ -1,4 +1,4 @@
-import { publish } from "../helpers/pub_sub";
+import { publish } from "../lib/pubsub/pubsub";
 
 export default class Component {
   constructor(props) {

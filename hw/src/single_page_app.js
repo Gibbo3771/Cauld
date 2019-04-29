@@ -1,4 +1,4 @@
-import { subscribe } from "./helpers/pub_sub";
+import { subscribe } from "./lib/pubsub/pubsub";
 import Weather from "./components/Weather/Weather";
 import { render } from "lit-html";
 

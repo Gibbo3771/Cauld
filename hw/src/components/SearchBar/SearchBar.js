@@ -1,7 +1,6 @@
 import Component from "../Component";
 import CrossButton from "../../components/CrossButton/CrossButton";
 import List from "../List/List";
-import { publish, subscribe } from "../../helpers/pub_sub";
 import { html } from "lit-html";
 
 export default class SearchBar extends Component {
