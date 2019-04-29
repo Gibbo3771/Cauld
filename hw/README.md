@@ -5,6 +5,21 @@ I however decided to take it a bit further and incorporate full ES6 support tran
 
 In order to get this application to work, you will have to first get an API key from [APIXU](https://www.apixu.com/)
 
+## Making API key available in app
+
+Once you have acquired an API key, create a new file in the **root** directory named `keystore.js` and from there, paste this in:
+
+```javascript
+const API_KEY="enter your api key here";
+
+mdoule.exports = API_KEY;
+```
+
+## Building and running
+
+In your terminal run `npm run build`, then you can open up `index.html` from the public folder into your desired browser.
+
 ## TODO
 
-Write details how to get API key into app.
+* At the time of writing this (29/04/19) I am currently writing (and learning) how to do DOM testing, so I will be writing unit and integration tests for the application.
+* Rewrite the way state is handled, it's currently messy. Probably going to use store pattern. Will see how time is.
