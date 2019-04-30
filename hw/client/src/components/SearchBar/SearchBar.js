@@ -1,5 +1,4 @@
 import Component from "../Component";
-import weatherApi from "../../helpers/weather_api/index";
 import CrossButton from "../../components/CrossButton/CrossButton";
 import List from "../List/List";
 import { html } from "lit-html";
