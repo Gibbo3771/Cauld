@@ -42,10 +42,10 @@ export default class SearchBar extends Component {
 
   onInputChange = evt => {
     const value = evt.target.value;
-    console.log(evt);
     this.setInputValue(value);
     if (value < 2) return;
     evt.preventDefault();
+    store.events.publish("Searchbar:search", store.state.searchbarValue);
   };
 
   onMouseEnter = () => {

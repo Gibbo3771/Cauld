@@ -14,6 +14,7 @@ export default class Weather extends Component {
     super({ store });
     this.searchBar = new SearchBar();
     store.events.subscribe("List:location-selected", this.getWeatherForecast);
+    store.events.subscribe("Searchbar:search", this.locationSearch);
   }
 
   render = data => {
@@ -25,14 +26,14 @@ export default class Weather extends Component {
   };
 
   getWeatherForecast = location => {
-    this.weather.forecast(location.name, 7, response => {
+    weatherApi.forecast(location.name, 7, response => {
       const { forecast } = response.data;
       const current = new CurrentWeather(response.data);
       const forecastDays = [];
       for (const day of forecast.forecastday) {
         forecastDays.push(new SingleDayForecast(day));
       }
-      store.dispatch("setWeather", { current, forecast });
+      store.dispatch("setWeather", { current, forecast: forecastDays });
       store.dispatch("setWeatherAvailable", { available: true });
       store.dispatch("removeLocations", {});
     });
