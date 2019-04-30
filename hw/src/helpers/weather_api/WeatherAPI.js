@@ -38,8 +38,11 @@ export default class WeatherAPI {
   };
 
   request = (url, callback) => {
-    axios.get(url).then(response => {
-      callback(response);
-    });
+    axios
+      .get(url)
+      .then(response => {
+        callback(response);
+      })
+      .catch(err => console.log(err));
   };
 }
