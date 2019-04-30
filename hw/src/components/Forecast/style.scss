@@ -1,0 +1,24 @@
+.weather {
+  display: flex;
+  opacity: 0;
+  width: 90%;
+  height: 100%;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+
+  > div {
+    display: grid;
+    grid-template-areas: "date date temp" ". icon ." "descriptor descriptor descriptor" "temp-range temp-range temp-range" " . wind .";
+    grid-template-columns: 90px 90px 90px;
+    grid-template-rows: 80px 100px 100px 60px 60px;
+    min-height: 400px;
+    max-height: 400px;
+    margin: 0.25rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #838383;
+  }
+}
