@@ -1,0 +1,40 @@
+.autocomplete {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.autocomplete-items-bordered {
+  border: 1px solid $font-color-1;
+}
+
+.autocomplete-items {
+  position: absolute;
+  z-index: 10;
+  top: 62.5%;
+  left: 0;
+  right: 0;
+
+  div {
+    padding: 10px;
+    cursor: pointer;
+    color: $font-color-1;
+    background: $primary-color;
+    padding: 1.75rem;
+    transition: all 0.25s ease-in;
+
+    &:nth-child(odd) {
+      background-color: $complimentary-primary-color;
+    }
+
+    &:hover {
+      transition: all 0.25s ease-out;
+      transform: scale(1.1);
+      background-color: $secondary-color;
+      color: $primary-color;
+    }
+  }
+}

@@ -1,8 +1,14 @@
+@mixin font-color {
+  color: $font-color-1;
+}
+
 #header {
+  @include font-color();
   grid-area: date;
 }
 
 .temp-current {
+  @include font-color();
   grid-area: temp;
   font-size: 2.25rem;
   font-weight: bold;
@@ -10,12 +16,14 @@
 }
 
 .icon {
+  @include font-color();
   grid-area: icon;
   justify-self: center;
   align-self: center;
 }
 
 .weather-descriptor {
+  @include font-color();
   grid-area: descriptor;
   padding: 0.75rem;
   font-size: 1.4rem;
@@ -23,6 +31,8 @@
 }
 
 .temperature-range {
+  @include font-color();
+
   grid-area: temp-range;
   font-size: 1.3rem;
   font-weight: bold;
@@ -30,15 +40,18 @@
 }
 
 .wind {
+  @include font-color();
+
   grid-area: wind;
   font-size: 1.15rem;
   text-align: center;
 }
 
-.blue {
-  background-color: rgb(114, 177, 250);
+.day-background {
+  @include font-color();
+  background-color: $complimentary-primary-color;
 }
 
 .current-day {
-  border: 1px solid rgb(71, 69, 69);
+  // border: 1px solid rgb(71, 69, 69);
 }
