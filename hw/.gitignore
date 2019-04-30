@@ -1,6 +1,7 @@
 node_modules/
 public/js/
 public/style/
+bundle.js
 
 keystore.js
 .env
