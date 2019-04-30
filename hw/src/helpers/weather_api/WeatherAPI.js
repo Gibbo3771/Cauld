@@ -1,7 +1,7 @@
 import queryString from "querystring";
 import axios from "axios";
 
-const URL = "http://api.apixu.com/v1";
+const URL = "https://api.apixu.com/v1";
 
 export default class WeatherAPI {
   constructor(config) {
