@@ -7,6 +7,7 @@ import { Forecast } from "../Forecast/Forecast";
 import Component from "../Component";
 import AppHeader from "../AppHeader/AppHeader";
 import SearchBar from "../SearchBar/SearchBar";
+import { Footer } from "../Footer/Footer";
 import store from "../../state/index";
 
 export default class Weather extends Component {
@@ -20,8 +21,9 @@ export default class Weather extends Component {
   render = data => {
     return html`
       <div id="main-view">
-        ${AppHeader("Weather")} ${this.searchBar.render()} ${Forecast()}
+        ${AppHeader("CAULD")} ${this.searchBar.render()} ${Forecast()}
       </div>
+      ${Footer()}
     `;
   };
 
