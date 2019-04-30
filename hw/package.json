@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server/server.js",
     "test": "mocha --require @babel/register './src/**/*.spec.js'",
     "test-lib": "mocha --require @babel/register './src/lib/**/*.spec.js'",
     "build": "webpack --config webpack.config.js",
-    "build-watch": "webpack -w --config webpack.config.js"
+    "build-watch": "webpack -w --config webpack.config.js",
+    "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +37,7 @@
     "animejs": "^3.0.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "lit-html": "^1.0.0"
   }

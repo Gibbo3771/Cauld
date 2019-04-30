@@ -4,10 +4,12 @@ const path = require("path");
 const port = process.env.PORT || 8080;
 const app = express();
 
-const publicPath = path.join(__dirname, "../public");
+const publicPath = path.join(__dirname, "../client/public");
 app.use(express.static(publicPath));
 
-app.get("*", (req, res) => res.send());
+app.get("", (req, res) => res.send());
+
+app.get("/api/weather", (req, res) => {});
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
