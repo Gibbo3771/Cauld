@@ -1,7 +1,7 @@
 import queryString from "querystring";
 import axios from "axios";
 
-const URL = "http://api.apixu.com/v1";
+const URL = "https://api.apixu.com/v1";
 
 export default class WeatherAPI {
   constructor(config) {
@@ -38,8 +38,11 @@ export default class WeatherAPI {
   };
 
   request = (url, callback) => {
-    axios.get(url).then(response => {
-      callback(response);
-    });
+    axios
+      .get(url)
+      .then(response => {
+        callback(response);
+      })
+      .catch(err => console.log(err));
   };
 }

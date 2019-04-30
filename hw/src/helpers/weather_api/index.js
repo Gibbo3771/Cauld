@@ -1,6 +1,5 @@
 import WeatherAPI from "./WeatherAPI";
-import API_KEY from "../../../keystore";
 
-const weatherApi = new WeatherAPI({ apiKey: API_KEY });
+const weatherApi = new WeatherAPI({ apiKey: process.env.API_KEY });
 
 export default weatherApi;

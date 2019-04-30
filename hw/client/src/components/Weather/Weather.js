@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import weatherApi from "../../helpers/weather_api/index";
+import axios from "axios";
 import { getClientIP } from "../../helpers/IPHelper";
 import CurrentWeather from "../../models/current_weather";
 import SingleDayForecast from "../../models/single_day_forecast";
@@ -26,7 +26,7 @@ export default class Weather extends Component {
   };
 
   getWeatherForecast = location => {
-    weatherApi.forecast(location.name, 7, response => {
+    axios.get(`/api/weather/forecast/${location.name}`).then(response => {
       const { forecast } = response.data;
       const current = new CurrentWeather(response.data);
       const forecastDays = [];
@@ -40,7 +40,7 @@ export default class Weather extends Component {
   };
 
   locationSearch = location => {
-    weatherApi.search(location, response => {
+    axios.get(`/api/weather/search/${location}`).then(response => {
       store.dispatch("addLocations", response.data);
     });
   };
