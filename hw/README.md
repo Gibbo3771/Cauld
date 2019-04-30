@@ -7,17 +7,21 @@ In order to get this application to work, you will have to first get an API key 
 
 ## Making API key available in app
 
-Once you have acquired an API key, create a new file in the **root** directory named `keystore.js` and from there, paste this in:
+Once you have acquired an API key, create a new file in the **root** directory named `.env` and from there, paste this in:
 
 ```javascript
-const API_KEY="enter your api key here";
-
-mdoule.exports = API_KEY;
+API_KEY=YOUR-API-KEY;
 ```
 
 ## Building and running
 
-In your terminal run `npm run build`, then you can open up `index.html` from the public folder into your desired browser.
+Copy and paste the following into your terminal:
+
+```
+npm i && npm run build && npm start
+```
+
+Go to `localhost:8080`.
 
 ## TODO
 
