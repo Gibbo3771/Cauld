@@ -13,8 +13,12 @@ export default class Store {
 
     this.state = new Proxy(params.state || {}, {
       set: (state, key, value) => {
+        const prevState = { ...state };
         state[key] = value;
-        this.events.publish("Store:state-change", this.state);
+        this.events.publish("Store:state-change", {
+          newState: state,
+          prevState
+        });
         return true;
       }
     });

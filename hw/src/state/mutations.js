@@ -20,7 +20,7 @@ export default {
     return state;
   },
   setSearchbarValue(state, payload) {
-    state.input = payload;
+    state.searchbarValue = payload;
     return state;
   }
 };

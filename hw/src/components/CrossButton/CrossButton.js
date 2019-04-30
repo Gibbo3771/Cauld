@@ -1,10 +1,11 @@
 import Component from "../Component";
 import { html } from "lit-html";
 import { classMap } from "lit-html/directives/class-map";
+import store from "../../state/index";
 
 export default class CrossButton extends Component {
   constructor(props) {
-    super(props);
+    super({ store });
   }
 
   render = () => {
@@ -18,8 +19,12 @@ export default class CrossButton extends Component {
         id="button-cross"
         class=${classMap(classes)}
         type="submit"
-        @click=${evt => this.props.onClick(evt)}
+        @click=${this.handleClick}
       ></div>
     `;
+  };
+
+  handleClick = () => {
+    store.events.publish("Cross:click", {});
   };
 }

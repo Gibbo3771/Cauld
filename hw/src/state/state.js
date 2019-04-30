@@ -7,5 +7,5 @@ export default {
     forecast: []
   },
   autoCompleteVisible: false,
-  input: ""
+  searchbarValue: ""
 };

@@ -1,22 +1,23 @@
 import Component from "../Component";
+import weatherApi from "../../helpers/weather_api/index";
 import CrossButton from "../../components/CrossButton/CrossButton";
 import List from "../List/List";
 import { html } from "lit-html";
+import store from "../../state/index";
 
 export default class SearchBar extends Component {
   constructor(props) {
-    super(props);
-    this.crossButton = new CrossButton({ onClick: this.onCrossClick });
+    super({ store });
+    store.events.subscribe("Cross:click", this.clear);
+    store.events.subscribe("List:location-selected", location =>
+      this.setInputValue(location.name)
+    );
+    this.crossButton = new CrossButton();
     this.list = new List();
-    this.state = {
-      autoCompleteVisible: false,
-      input: ""
-    };
   }
 
-  render = props => {
-    super.render(props);
-    const { weather, locations } = this.props;
+  render = () => {
+    // console.log(store.state);
     return html`
       <div
         id="autocomplete"
@@ -29,56 +30,41 @@ export default class SearchBar extends Component {
           type="text"
           autocomplete="off"
           placeholder="Enter city or zipcode"
-          .value=${this.state.input}
+          .value=${store.state.searchbarValue}
           @input=${this.onInputChange}
           @mouseenter=${this.onMouseEnter}
           @click=${this.onClick}
         />
-        ${this.crossButton.render()}
-        ${this.list.render({
-          ...this.state,
-          onLocationSelected: this.onLocationSelected,
-          weather: weather,
-          locations: locations
-        })}
+        ${this.crossButton.render()} ${this.list.render()}
       </div>
     `;
   };
 
-  onLocationSelected = location => {
-    const { onLocationSelected } = this.props;
-    this.setInputValue(location.name);
-    onLocationSelected(location);
-  };
-
   onInputChange = evt => {
-    this.setState({ autoCompleteVisible: true });
-    this.setInputValue(evt.target.value);
-    const { input } = this.state;
-    if (input < 2) return;
+    const value = evt.target.value;
+    console.log(evt);
+    this.setInputValue(value);
+    if (value < 2) return;
     evt.preventDefault();
-    const { onInputChange } = this.props;
-    onInputChange(input);
   };
 
   onMouseEnter = () => {
-    this.setState({ autoCompleteVisible: true });
+    store.dispatch("autoCompleteVisible", true);
   };
 
   onClick = () => {
-    this.setState({ autoCompleteVisible: true });
+    store.dispatch("autoCompleteVisible", true);
   };
 
   onMouseLeave = () => {
-    this.setState({ autoCompleteVisible: false });
+    store.dispatch("autoCompleteVisible", false);
   };
 
   setInputValue = value => {
-    this.setState({ input: value });
+    store.dispatch("setSearchbarValue", value);
   };
 
-  onCrossClick = () => {
-    this.setState({ input: "" });
-    this.props.onCrossClick();
+  clear = () => {
+    store.dispatch("setSearchbarValue", "");
   };
 }

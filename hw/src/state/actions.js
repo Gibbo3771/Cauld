@@ -1,6 +1,6 @@
 export default {
   addLocations(context, payload) {
-    context.commit("addItem", payload);
+    context.commit("addLocations", payload);
   },
   removeLocations(context, payload) {
     context.commit("removeLocations", payload);

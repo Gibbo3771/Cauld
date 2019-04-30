@@ -10,6 +10,8 @@ export default class PubSub {
 
   publish(event, payload = {}) {
     if (!this.events.hasOwnProperty(event)) return [];
-    self.events[event].map(callback => callback(payload));
+    this.events[event].map(callback => {
+      callback(payload);
+    });
   }
 }
