@@ -22,4 +22,4 @@ In your terminal run `npm run build`, then you can open up `index.html` from the
 ## TODO
 
 * At the time of writing this (29/04/19) I am currently writing (and learning) how to do DOM testing, so I will be writing unit and integration tests for the application.
-* ~~Rewrite the way state is handled, it's currently messy. Probably going to use store pattern. Will see how time is.~~ (See commit f0f03c)[https://github.com/Gibbo3771/Weather-forecaster/commit/f0f03c42b34064225a6069c5401797e7e76bc586]
+* ~~Rewrite the way state is handled, it's currently messy. Probably going to use store pattern. Will see how time is.~~ [See commit f0f03c](https://github.com/Gibbo3771/Weather-forecaster/commit/f0f03c42b34064225a6069c5401797e7e76bc586)
