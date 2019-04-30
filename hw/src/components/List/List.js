@@ -1,32 +1,28 @@
 import Component from "../Component";
 import { html } from "lit-html";
 import { ListItem } from "./ListItem";
+import store from "../../state/index";
 
 export default class List extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super({ store });
   }
 
-  render(props) {
-    const { autoCompleteVisible } = props;
+  render() {
+    const { autoCompleteVisible } = store.state;
     if (!autoCompleteVisible) return;
     return html`
       <div id="container" class="autocomplete-items">
-        ${this.createItems(props)}
+        ${this.createItems()}
       </div>
     `;
   }
 
   createItems = props => {
-    const { locations, onLocationSelected } = props;
+    const { locations } = store.state;
     const items = [];
     locations.forEach(location => {
-      items.push(
-        ListItem({
-          location: location,
-          onLocationSelected: onLocationSelected
-        })
-      );
+      items.push(ListItem({ location }));
     });
     return items;
   };
