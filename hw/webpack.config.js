@@ -33,5 +33,5 @@ module.exports = {
   node: {
     fs: "empty"
   },
-  mode: "development"
+  mode: "production"
 };
