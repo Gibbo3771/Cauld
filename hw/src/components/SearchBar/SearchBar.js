@@ -66,5 +66,6 @@ export default class SearchBar extends Component {
 
   clear = () => {
     store.dispatch("setSearchbarValue", "");
+    document.getElementById("search").focus();
   };
 }
