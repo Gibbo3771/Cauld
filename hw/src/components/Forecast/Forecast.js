@@ -2,9 +2,11 @@ import Component from "../../components/Component";
 import { html } from "lit-html";
 import { repeat } from "lit-html/directives/repeat";
 import { ForecastDay } from "../ForecastDay/ForecastDay";
+import anime from "animejs";
+import store from "../../state/index";
 
-export const Forecast = props => {
-  const { available, current, forecast } = props;
+export const Forecast = () => {
+  const { available, current, forecast } = store.state.weather;
   if (!available) return;
   return html`
     <div id="forecast" class="weather">
@@ -18,3 +20,5 @@ export const Forecast = props => {
     </div>
   `;
 };
+
+const fadeIn = () => {};

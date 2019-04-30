@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require @babel/register './src/**/*.spec.js'",
+    "test-lib": "mocha --require @babel/register './src/lib/**/*.spec.js'",
     "build": "webpack --config webpack.config.js",
     "build-watch": "webpack -w --config webpack.config.js"
   },

@@ -1,26 +1,16 @@
-import { publish } from "../helpers/pub_sub";
+import Store from "../lib/store/store";
 
 export default class Component {
-  constructor(props) {
-    this.props = props;
-    publish("Component:created", this);
+  constructor(props = {}) {
+    if (props.store instanceof Store) {
+      props.store.events.subscribe(
+        "Store:state-change",
+        this.componentDidUpdate
+      );
+    }
   }
 
-  render(props) {
-    this.props = { ...this.props, ...props };
-  }
-
-  componentDidMount() {}
+  render() {}
 
   componentDidUpdate() {}
-
-  setState(newState) {
-    const prevState = { ...this.state };
-    this.state = { ...this.state, ...newState };
-    publish("Component:state-changed", {
-      component: this,
-      newState: newState,
-      prevState: prevState
-    });
-  }
 }
