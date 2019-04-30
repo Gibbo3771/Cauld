@@ -2,6 +2,7 @@ import Component from "../../components/Component";
 import { html } from "lit-html";
 import { repeat } from "lit-html/directives/repeat";
 import { ForecastDay } from "../ForecastDay/ForecastDay";
+import anime from "animejs";
 import store from "../../state/index";
 
 export const Forecast = () => {
@@ -19,3 +20,5 @@ export const Forecast = () => {
     </div>
   `;
 };
+
+const fadeIn = () => {};
