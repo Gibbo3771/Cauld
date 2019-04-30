@@ -36,7 +36,7 @@ export default class Store {
     }
 
     const newState = this.mutations[mutationKey](this.state, payload);
-    this.state.set(Object.assign(this.state, newState));
+    this.state = Object.assign(this.state, newState);
     return true;
   }
 }
