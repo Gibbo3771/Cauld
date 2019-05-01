@@ -7,7 +7,7 @@ export const ForecastDay = props => {
   const { date } = props.forecast;
   const { isToday } = props;
   const classes = {
-    blue: true,
+    "day-background": true,
     "current-day": isToday
   };
   const markup = html`

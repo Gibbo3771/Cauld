@@ -6,7 +6,7 @@
   color: white;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  // padding: 2rem;
   flex-wrap: wrap;
 
   > div {
@@ -16,9 +16,14 @@
     grid-template-rows: 80px 100px 100px 60px 60px;
     min-height: 400px;
     max-height: 400px;
-    margin: 0.25rem;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid #838383;
+    margin: 0.5rem;
+    padding: 1.25rem;
+    border-right: 3px solid $secondary-color;
+    transition: all 0.25s ease;
+
+    &:hover {
+      transition: all 0.25s ease;
+      transform: scale(1.05);
+    }
   }
 }
