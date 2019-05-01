@@ -22,5 +22,9 @@ export default {
   setSearchbarValue(state, payload) {
     state.searchbarValue = payload;
     return state;
+  },
+  setCurrentLocation(state, payload) {
+    state.currentLocation = payload;
+    return state;
   }
 };

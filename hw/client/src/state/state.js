@@ -1,5 +1,6 @@
 // Initial state
 export default {
+  selectedLocation: null,
   locations: [],
   weather: {
     available: false,

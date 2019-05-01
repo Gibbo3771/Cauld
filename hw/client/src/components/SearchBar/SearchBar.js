@@ -16,7 +16,6 @@ export default class SearchBar extends Component {
   }
 
   render = () => {
-    // console.log(store.state);
     return html`
       <div
         id="autocomplete"
