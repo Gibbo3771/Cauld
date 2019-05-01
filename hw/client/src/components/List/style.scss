@@ -13,8 +13,6 @@
 
 .autocomplete-items {
   position: absolute;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
   z-index: 10;
   top: 62.5%;
   left: 0;
@@ -28,10 +26,12 @@
     padding: 1.75rem;
     transition: all 0.25s ease-in;
 
+    &:nth-child(odd) {
+      background-color: $complimentary-primary-color;
+    }
+
     &:hover {
       transition: all 0.25s ease-out;
-      //   border-left: 1px solid $font-color-1;
-      //   border-right: 1px solid $font-color-1;
       transform: scale(1.1);
       background-color: $secondary-color;
       color: $primary-color;

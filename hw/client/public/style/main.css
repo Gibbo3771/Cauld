@@ -46,8 +46,6 @@ body {
 
 .autocomplete-items {
   position: absolute;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
   z-index: 10;
   top: 62.5%;
   left: 0;
@@ -59,6 +57,8 @@ body {
     background: #131103;
     padding: 1.75rem;
     transition: all 0.25s ease-in; }
+    .autocomplete-items div:nth-child(odd) {
+      background-color: #202020; }
     .autocomplete-items div:hover {
       transition: all 0.25s ease-out;
       transform: scale(1.1);
@@ -111,7 +111,11 @@ body {
 .footer-link-git {
   color: #ecebeb;
   font-size: 3rem;
-  padding: 1rem; }
+  padding: 1rem;
+  transition: all 0.4s ease; }
+  .footer-link-git:hover {
+    transition: all 0.4s ease;
+    transform: rotate(360deg) scale(1.15); }
 
 .footer-link-atrr {
   position: fixed;
@@ -178,7 +182,11 @@ body {
     max-height: 400px;
     margin: 0.5rem;
     padding: 1.25rem;
-    border-right: 3px solid #f7e601; }
+    border-right: 3px solid #f7e601;
+    transition: all 0.25s ease; }
+    .weather > div:hover {
+      transition: all 0.25s ease;
+      transform: scale(1.05); }
 
 .button-cross {
   position: absolute;

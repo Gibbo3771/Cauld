@@ -19,5 +19,11 @@
     margin: 0.5rem;
     padding: 1.25rem;
     border-right: 3px solid $secondary-color;
+    transition: all 0.25s ease;
+
+    &:hover {
+      transition: all 0.25s ease;
+      transform: scale(1.05);
+    }
   }
 }

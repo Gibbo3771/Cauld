@@ -16,7 +16,10 @@ const renderIcon = () => {
   };
   return html`
     <div class="footer">
-      <a class=${classMap(classes)}></a>
+      <a
+        href="https://github.com/Gibbo3771/Weather-forecaster/tree/master/hw"
+        class=${classMap(classes)}
+      ></a>
       <a
         class="footer-link-atrr"
         href="https://www.apixu.com/"
