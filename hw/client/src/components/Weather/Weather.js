@@ -28,7 +28,7 @@ export default class Weather extends Component {
 
   getByIP = () => {
     axios
-      .get("/api/ip")
+      .get("https://api.ipify.org?format=json")
       .then(response => {
         return this.locationSearch(response.data.ip);
       })
