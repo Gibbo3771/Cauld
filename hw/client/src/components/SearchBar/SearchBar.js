@@ -2,6 +2,7 @@ import Component from "../Component";
 import CrossButton from "../../components/CrossButton/CrossButton";
 import List from "../List/List";
 import { html } from "lit-html";
+import { animate } from "./animations";
 import store from "../../state/index";
 
 export default class SearchBar extends Component {
@@ -11,6 +12,7 @@ export default class SearchBar extends Component {
     store.events.subscribe("List:location-selected", location =>
       this.setInputValue(location.name)
     );
+    store.events.subscribe("Animations:autocomplete-open", animate);
     this.crossButton = new CrossButton();
     this.list = new List();
   }

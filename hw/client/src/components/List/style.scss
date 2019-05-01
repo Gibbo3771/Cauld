@@ -13,7 +13,9 @@
 
 .autocomplete-items {
   position: absolute;
+  height: 0;
   z-index: 10;
+  overflow: hidden;
   top: 62.5%;
   left: 0;
   right: 0;
@@ -32,7 +34,6 @@
 
     &:hover {
       transition: all 0.25s ease-out;
-      transform: scale(1.1);
       background-color: $secondary-color;
       color: $primary-color;
     }

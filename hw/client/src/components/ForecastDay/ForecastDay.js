@@ -11,7 +11,7 @@ export const ForecastDay = props => {
     "current-day": isToday
   };
   const markup = html`
-    <div class=${classMap(classes)}>
+    <div id="${new Date(date).getDay()}-day" class=${classMap(classes)}>
       <div id="header">
         <div>
           ${renderHeader(props)}

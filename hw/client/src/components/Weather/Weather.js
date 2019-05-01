@@ -14,7 +14,7 @@ export default class Weather extends Component {
     this.searchBar = new SearchBar();
     store.events.subscribe("List:location-selected", this.getWeatherForecast);
     store.events.subscribe("Searchbar:search", this.locationSearch);
-    this.getByIP();
+    // this.getByIP();
   }
 
   render = data => {
@@ -50,12 +50,14 @@ export default class Weather extends Component {
         store.dispatch("setWeather", response.data);
         store.dispatch("setWeatherAvailable", { available: true });
         store.dispatch("removeLocations", {});
+        store.events.publish("Animations:forecast");
       });
   };
 
   locationSearch = location => {
     return axios.get(`/api/weather/search/${location}`).then(response => {
       store.dispatch("addLocations", response.data);
+      store.events.publish("Animations:autocomplete-open");
     });
   };
 }

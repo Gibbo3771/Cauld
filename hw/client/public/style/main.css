@@ -33,6 +33,9 @@ body {
   min-height: 100%;
   padding-bottom: 6rem; }
 
+.fade-in-start {
+  opacity: 0; }
+
 .autocomplete {
   position: relative;
   display: flex;
@@ -46,7 +49,9 @@ body {
 
 .autocomplete-items {
   position: absolute;
+  height: 0;
   z-index: 10;
+  overflow: hidden;
   top: 62.5%;
   left: 0;
   right: 0; }
@@ -61,7 +66,6 @@ body {
       background-color: #202020; }
     .autocomplete-items div:hover {
       transition: all 0.25s ease-out;
-      transform: scale(1.1);
       background-color: #f7e601;
       color: #131103; }
 
@@ -163,7 +167,8 @@ body {
 
 .day-background {
   color: #ecebeb;
-  background-color: #202020; }
+  background-color: #202020;
+  opacity: 0; }
 
 .weather {
   display: flex;
@@ -182,11 +187,7 @@ body {
     max-height: 400px;
     margin: 0.5rem;
     padding: 1.25rem;
-    border-right: 3px solid #f7e601;
-    transition: all 0.25s ease; }
-    .weather > div:hover {
-      transition: all 0.25s ease;
-      transform: scale(1.05); }
+    border-right: 3px solid #f7e601; }
 
 .button-cross {
   position: absolute;

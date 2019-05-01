@@ -25,6 +25,7 @@ export default class List extends Component {
 
   createItems = props => {
     const { locations } = store.state;
+    if (locations.length === 0) return;
     const items = [];
     locations.forEach(location => {
       items.push(ListItem({ location }));
