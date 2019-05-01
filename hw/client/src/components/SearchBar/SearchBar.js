@@ -46,14 +46,17 @@ export default class SearchBar extends Component {
     if (value < 2) return;
     evt.preventDefault();
     store.events.publish("Searchbar:search", store.state.searchbarValue);
+    store.events.publish("Animations:autocomplete-open");
   };
 
   onMouseEnter = () => {
     store.dispatch("autoCompleteVisible", true);
+    store.events.publish("Animations:autocomplete-open");
   };
 
   onClick = () => {
     store.dispatch("autoCompleteVisible", true);
+    store.events.publish("Animations:autocomplete-open");
   };
 
   onMouseLeave = () => {
