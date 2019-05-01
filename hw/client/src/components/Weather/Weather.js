@@ -28,7 +28,9 @@ export default class Weather extends Component {
 
   getByIP = () => {
     axios
-      .get("https://api.ipify.org?format=json")
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://api.ipify.org?format=json"
+      )
       .then(response => {
         return this.locationSearch(response.data.ip);
       })
