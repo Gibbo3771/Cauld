@@ -1,5 +1,5 @@
 @mixin font-color {
-  color: $font-color-1;
+  color: black;
 }
 
 #header {
@@ -49,7 +49,7 @@
 
 .day-background {
   @include font-color();
-  background-color: $complimentary-primary-color;
+  background-color: rgb(235, 235, 235);
 }
 
 .current-day {
