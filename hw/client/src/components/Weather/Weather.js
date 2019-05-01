@@ -1,8 +1,6 @@
 import { html } from "lit-html";
 import axios from "axios";
 import { getClientIP } from "../../helpers/IPHelper";
-import CurrentWeather from "../../models/current_weather";
-import SingleDayForecast from "../../models/single_day_forecast";
 import { Forecast } from "../Forecast/Forecast";
 import Component from "../Component";
 import AppHeader from "../AppHeader/AppHeader";
@@ -29,13 +27,7 @@ export default class Weather extends Component {
 
   getWeatherForecast = location => {
     axios.get(`/api/weather/forecast/${location.name}`).then(response => {
-      const { forecast } = response.data;
-      const current = new CurrentWeather(response.data);
-      const forecastDays = [];
-      for (const day of forecast.forecastday) {
-        forecastDays.push(new SingleDayForecast(day));
-      }
-      store.dispatch("setWeather", { current, forecast: forecastDays });
+      store.dispatch("setWeather", response.data);
       store.dispatch("setWeatherAvailable", { available: true });
       store.dispatch("removeLocations", {});
     });
