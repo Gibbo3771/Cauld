@@ -4,12 +4,19 @@ const path = require("path");
 const port = process.env.PORT || 8080;
 const app = express();
 const weatherApi = require("./weather_api/index");
+const { getClientIP } = require("./ipify/ipify");
 const { createModels } = require("./service_workers/forecast_worker");
 
 const publicPath = path.join(__dirname, "../client/public");
 app.use(express.static(publicPath));
 
 app.get("", (req, res) => res.send());
+
+app.get("/api/ip", (req, res) => {
+  getClientIP().then(response => {
+    res.send(response.data);
+  });
+});
 
 app.get("/api/weather/forecast/:name", (req, res) => {
   const name = req.params.name;

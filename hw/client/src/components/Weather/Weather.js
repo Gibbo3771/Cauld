@@ -14,6 +14,7 @@ export default class Weather extends Component {
     this.searchBar = new SearchBar();
     store.events.subscribe("List:location-selected", this.getWeatherForecast);
     store.events.subscribe("Searchbar:search", this.locationSearch);
+    this.getByIP();
   }
 
   render = data => {
@@ -25,16 +26,33 @@ export default class Weather extends Component {
     `;
   };
 
+  getByIP = () => {
+    axios
+      .get("/api/ip")
+      .then(response => {
+        return this.locationSearch(response.data.ip);
+      })
+      .then(response => {
+        this.getWeatherForecast(store.state.locations[0]);
+      })
+      .then(() => {
+        store.dispatch("setSearchbarValue", store.state.locations[0].name);
+      });
+  };
+
   getWeatherForecast = location => {
-    axios.get(`/api/weather/forecast/${location.name}`).then(response => {
-      store.dispatch("setWeather", response.data);
-      store.dispatch("setWeatherAvailable", { available: true });
-      store.dispatch("removeLocations", {});
-    });
+    return axios
+      .get(`/api/weather/forecast/${location.name}`)
+      .then(response => {
+        store.dispatch("setCurrentLocation", location);
+        store.dispatch("setWeather", response.data);
+        store.dispatch("setWeatherAvailable", { available: true });
+        store.dispatch("removeLocations", {});
+      });
   };
 
   locationSearch = location => {
-    axios.get(`/api/weather/search/${location}`).then(response => {
+    return axios.get(`/api/weather/search/${location}`).then(response => {
       store.dispatch("addLocations", response.data);
     });
   };

@@ -16,5 +16,8 @@ export default {
   },
   setSearchbarValue(context, payload) {
     context.commit("setSearchbarValue", payload);
+  },
+  setCurrentLocation(context, payload) {
+    context.commit("setCurrentLocation", payload);
   }
 };
