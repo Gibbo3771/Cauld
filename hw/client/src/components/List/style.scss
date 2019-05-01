@@ -26,14 +26,15 @@
     color: $font-color-1;
     background: $primary-color;
     padding: 1.75rem;
-    transition: transform 0.25s ease-in;
+    transition: all 0.25s ease-in;
 
     &:hover {
-      transition: transform 0.25s ease-out;
-      border-left: 1px solid $font-color-1;
-      border-right: 1px solid $font-color-1;
+      transition: all 0.25s ease-out;
+      //   border-left: 1px solid $font-color-1;
+      //   border-right: 1px solid $font-color-1;
       transform: scale(1.1);
-      color: $font-color-1;
+      background-color: $secondary-color;
+      color: $primary-color;
     }
   }
 }

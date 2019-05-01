@@ -58,13 +58,12 @@ body {
     color: #ecebeb;
     background: #131103;
     padding: 1.75rem;
-    transition: transform 0.25s ease-in; }
+    transition: all 0.25s ease-in; }
     .autocomplete-items div:hover {
-      transition: transform 0.25s ease-out;
-      border-left: 1px solid #ecebeb;
-      border-right: 1px solid #ecebeb;
+      transition: all 0.25s ease-out;
       transform: scale(1.1);
-      color: #ecebeb; }
+      background-color: #f7e601;
+      color: #131103; }
 
 .header {
   display: flex;
@@ -74,8 +73,8 @@ body {
   justify-content: center; }
 
 .page-title {
-  font-size: 4rem;
-  padding: 2rem;
+  font-size: 5rem;
+  padding: 2.25rem;
   color: #131103; }
 
 .input {
@@ -101,7 +100,7 @@ body {
   display: flex;
   width: 100%;
   height: 6rem;
-  background: #131103;
+  background: #202020;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -169,7 +168,6 @@ body {
   color: white;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   flex-wrap: wrap; }
   .weather > div {
     display: grid;
@@ -178,7 +176,7 @@ body {
     grid-template-rows: 80px 100px 100px 60px 60px;
     min-height: 400px;
     max-height: 400px;
-    margin: 0.3rem;
+    margin: 0.5rem;
     padding: 1.25rem;
     border-right: 3px solid #f7e601; }
 
