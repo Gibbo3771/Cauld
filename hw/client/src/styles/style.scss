@@ -1,6 +1,10 @@
+@import "./color.scss";
 @import "./global.scss";
+@import "../components/List/style.scss";
+@import "../components/AppHeader/style.scss";
 @import "../components/SearchBar/style.scss";
 @import "../components/Weather/style.scss";
+@import "../components/Footer/style.scss";
 @import "../components/ForecastDay/style.scss";
 @import "../components/Forecast/style.scss";
 @import "../components/CrossButton/style.scss";
