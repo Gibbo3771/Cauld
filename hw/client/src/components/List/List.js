@@ -2,7 +2,7 @@ import Component from "../Component";
 import { html } from "lit-html";
 import { ListItem } from "./ListItem";
 import store from "../../state/index";
-import { animate } from "./animations";
+import { show, hide } from "./animations";
 import { classMap } from "lit-html/directives/class-map";
 
 export default class List extends Component {
@@ -23,8 +23,16 @@ export default class List extends Component {
     `;
   }
 
-  postRender() {
-    animate();
+  stateDidChange(prevState, nextState) {
+    if (nextState.locations.length > 0) {
+      show();
+      return;
+    } else if (
+      nextState.locations.length === 0 ||
+      nextState.searchbarValue.length <= 2
+    ) {
+      hide();
+    }
   }
 
   createItems = props => {

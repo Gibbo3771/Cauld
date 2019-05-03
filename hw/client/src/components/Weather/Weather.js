@@ -12,8 +12,8 @@ export default class Weather extends Component {
   constructor() {
     super({ store });
     this.searchBar = new SearchBar();
-    store.events.subscribe("List:location-selected", this.getWeatherForecast);
     store.events.subscribe("Searchbar:search", this.locationSearch);
+    store.events.subscribe("List:location-selected", this.getWeatherForecast);
     // this.getByIP(); Going to make this a button
   }
 
@@ -46,6 +46,8 @@ export default class Weather extends Component {
     return axios
       .get(`/api/weather/forecast/${location.name}`)
       .then(response => {
+        console.log("getting forecast");
+
         store.dispatch("setCurrentLocation", location);
         store.dispatch("setWeather", response.data);
         store.dispatch("setWeatherAvailable", { available: true });
@@ -56,6 +58,8 @@ export default class Weather extends Component {
 
   locationSearch = location => {
     return axios.get(`/api/weather/search/${location}`).then(response => {
+      console.log("getting locations");
+
       store.dispatch("addLocations", response.data);
       store.events.publish("Animations:autocomplete-open");
     });

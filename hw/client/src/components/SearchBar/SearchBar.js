@@ -30,8 +30,6 @@ export default class SearchBar extends Component {
           placeholder="Enter city or zipcode"
           .value=${store.state.searchbarValue}
           @input=${this.onInputChange}
-          @mouseenter=${this.onSomeSortOfFocus}
-          @click=${this.onSomeSortOfFocus}
         />
         ${this.crossButton.render()} ${this.list.render()}
       </div>
@@ -39,18 +37,24 @@ export default class SearchBar extends Component {
   };
 
   onInputChange = evt => {
+    evt.preventDefault();
     const value = evt.target.value;
     this.setInputValue(value);
-    if (value < 2) return;
-    evt.preventDefault();
-    store.events.publish("Searchbar:search", store.state.searchbarValue);
-    if (store.state.locations.length === 0) return;
+    if (value.length <= 2) return;
     store.dispatch("autoCompleteVisible", true);
+    store.events.publish("Searchbar:search", store.state.searchbarValue);
   };
 
+  stateDidChange(prevState, nextState) {
+    const prevLen = prevState.searchbarValue.length;
+    const nextLen = nextState.searchbarValue.length;
+    if (nextLen < prevLen && nextLen <= 2) {
+      store.dispatch("autoCompleteVisible", false);
+      store.dispatch("addLocations", []);
+    }
+  }
+
   onSomeSortOfFocus = () => {
-    const { locations } = store.state;
-    if (locations.length === 0) return;
     store.dispatch("autoCompleteVisible", true);
   };
 

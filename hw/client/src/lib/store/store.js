@@ -4,24 +4,12 @@ export default class Store {
   constructor(params) {
     this.actions = {};
     this.mutations = {};
-    this.state = {};
+    this.state = params.state ? params.state : {};
 
     this.events = new PubSub();
 
     if (params.hasOwnProperty("actions")) this.actions = params.actions;
     if (params.hasOwnProperty("mutations")) this.mutations = params.mutations;
-
-    this.state = new Proxy(params.state || {}, {
-      set: (state, key, value) => {
-        const prevState = { ...state };
-        state[key] = value;
-        this.events.publish("Store:state-change", {
-          nextState: state,
-          prevState
-        });
-        return true;
-      }
-    });
   }
 
   dispatch(actionKey, payload) {
@@ -29,6 +17,7 @@ export default class Store {
       console.error(`Action ${actionKey} does not exist`);
       return false;
     }
+    console.log("dispatch", payload);
     this.actions[actionKey](this, payload);
     return true;
   }
@@ -39,8 +28,13 @@ export default class Store {
       return false;
     }
 
-    const newState = this.mutations[mutationKey](this.state, payload);
-    this.state = Object.assign(this.state, newState);
+    const prevState = { ...this.state };
+    this.state = this.mutations[mutationKey](this.state, payload);
+    this.events.publish("Store:state-change", {
+      prevState: prevState,
+      nextState: this.state
+    });
+
     return true;
   }
 }
