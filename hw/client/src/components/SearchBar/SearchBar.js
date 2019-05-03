@@ -8,9 +8,10 @@ export default class SearchBar extends Component {
   constructor(props) {
     super({ store });
     store.events.subscribe("Cross:click", this.clear);
-    store.events.subscribe("List:location-selected", location =>
-      this.setInputValue(location.name)
-    );
+    store.events.subscribe("List:location-selected", location => {
+      console.log("Setting searchbar to selected");
+      this.setInputValue(location.name);
+    });
     this.crossButton = new CrossButton();
     this.list = new List();
   }

@@ -46,20 +46,17 @@ export default class Weather extends Component {
     return axios
       .get(`/api/weather/forecast/${location.name}`)
       .then(response => {
-        console.log("getting forecast");
-
         store.dispatch("setCurrentLocation", location);
         store.dispatch("setWeather", response.data);
-        store.dispatch("setWeatherAvailable", { available: true });
-        store.dispatch("removeLocations", {});
+        store.dispatch("setWeatherAvailable", true);
+        store.dispatch("autoCompleteVisible", false);
+        store.dispatch("addLocations", []);
         store.events.publish("Animations:forecast");
       });
   };
 
   locationSearch = location => {
     return axios.get(`/api/weather/search/${location}`).then(response => {
-      console.log("getting locations");
-
       store.dispatch("addLocations", response.data);
       store.events.publish("Animations:autocomplete-open");
     });

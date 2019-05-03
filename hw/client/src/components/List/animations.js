@@ -17,7 +17,7 @@ export const show = () => {
         anime({
           targets: el,
           height: "100%",
-          duration: 200,
+          duration: 120,
           easing: "linear"
         });
       }
@@ -33,7 +33,7 @@ export const hide = () => {
     anime({
       targets: el,
       height: "0",
-      duration: 200,
+      duration: 120,
       easing: "linear",
       complete: () => {
         anime({

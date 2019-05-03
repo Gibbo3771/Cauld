@@ -11,6 +11,7 @@ export default {
   },
   setWeatherAvailable(state, payload) {
     state.weather.available = payload;
+    return state;
   },
   setWeather(state, payload) {
     state.weather.current = payload.current;
