@@ -54,7 +54,8 @@ body {
   overflow: hidden;
   top: 62.5%;
   left: 0;
-  right: 0; }
+  right: 0;
+  opacity: 0; }
   .autocomplete-items div {
     padding: 10px;
     cursor: pointer;

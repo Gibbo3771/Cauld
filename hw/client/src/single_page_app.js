@@ -10,6 +10,8 @@ export default class SinglePageApp {
   }
 
   render = () => {
+    store.events.publish("App:pre-render");
     render(this.weather.render(), this.root);
+    store.events.publish("App:post-render");
   };
 }

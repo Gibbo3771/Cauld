@@ -2,7 +2,6 @@ import Component from "../Component";
 import CrossButton from "../../components/CrossButton/CrossButton";
 import List from "../List/List";
 import { html } from "lit-html";
-import { animate } from "./animations";
 import store from "../../state/index";
 
 export default class SearchBar extends Component {
@@ -12,7 +11,6 @@ export default class SearchBar extends Component {
     store.events.subscribe("List:location-selected", location =>
       this.setInputValue(location.name)
     );
-    store.events.subscribe("Animations:autocomplete-open", animate);
     this.crossButton = new CrossButton();
     this.list = new List();
   }
@@ -32,8 +30,8 @@ export default class SearchBar extends Component {
           placeholder="Enter city or zipcode"
           .value=${store.state.searchbarValue}
           @input=${this.onInputChange}
-          @mouseenter=${this.onMouseEnter}
-          @click=${this.onClick}
+          @mouseenter=${this.onSomeSortOfFocus}
+          @click=${this.onSomeSortOfFocus}
         />
         ${this.crossButton.render()} ${this.list.render()}
       </div>
@@ -46,17 +44,14 @@ export default class SearchBar extends Component {
     if (value < 2) return;
     evt.preventDefault();
     store.events.publish("Searchbar:search", store.state.searchbarValue);
-    store.events.publish("Animations:autocomplete-open");
+    if (store.state.locations.length === 0) return;
+    store.dispatch("autoCompleteVisible", true);
   };
 
-  onMouseEnter = () => {
+  onSomeSortOfFocus = () => {
+    const { locations } = store.state;
+    if (locations.length === 0) return;
     store.dispatch("autoCompleteVisible", true);
-    store.events.publish("Animations:autocomplete-open");
-  };
-
-  onClick = () => {
-    store.dispatch("autoCompleteVisible", true);
-    store.events.publish("Animations:autocomplete-open");
   };
 
   onMouseLeave = () => {

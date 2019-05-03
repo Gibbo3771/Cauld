@@ -16,7 +16,7 @@ export default class Store {
         const prevState = { ...state };
         state[key] = value;
         this.events.publish("Store:state-change", {
-          newState: state,
+          nextState: state,
           prevState
         });
         return true;

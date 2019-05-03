@@ -14,7 +14,7 @@ export default class Weather extends Component {
     this.searchBar = new SearchBar();
     store.events.subscribe("List:location-selected", this.getWeatherForecast);
     store.events.subscribe("Searchbar:search", this.locationSearch);
-    // this.getByIP();
+    // this.getByIP(); Going to make this a button
   }
 
   render = data => {
