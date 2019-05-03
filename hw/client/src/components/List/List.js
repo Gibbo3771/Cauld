@@ -31,7 +31,7 @@ export default class List extends Component {
       animations
     } = nextState;
     if (autoCompleteVisible && !animations.listShow && locations.length > 0) {
-      store.dispatch("setListShow", true);
+      store.dispatch("setDropdownAnimationStatus", true);
       show();
       return;
     } else if (
@@ -39,7 +39,7 @@ export default class List extends Component {
       animations.listShow &&
       (locations.length === 0 || searchbarValue.length <= 2)
     ) {
-      store.dispatch("setListShow", false);
+      store.dispatch("setDropdownAnimationStatus", false);
       hide();
     }
   }

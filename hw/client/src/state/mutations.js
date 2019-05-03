@@ -30,12 +30,12 @@ export default {
     state.currentLocation = payload;
     return state;
   },
-  setListShow(state, payload) {
-    state.animations.listShow = payload;
+  setDropdownAnimationStatus(state, payload) {
+    state.animations.dropdown.collapsed = payload;
     return state;
   },
-  setIsToday(state, payload) {
-    state.weather.isToday = payload;
+  setForecastAnimationStatus(state, payload) {
+    state.animations.forecast.onScreen = payload;
     return state;
   }
 };

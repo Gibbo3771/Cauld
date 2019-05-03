@@ -20,10 +20,10 @@ export default {
   setCurrentLocation(context, payload) {
     context.commit("setCurrentLocation", payload);
   },
-  setListShow(context, payload) {
-    context.commit("setListShow", payload);
+  setDropdownAnimationStatus(context, payload) {
+    context.commit("setDropdownAnimationStatus", payload);
   },
-  setIsToday(context, payload) {
-    context.commit("setIsToday", payload);
+  setForecastAnimationStatus(context, payload) {
+    context.commit("setForecastAnimationStatus", payload);
   }
 };

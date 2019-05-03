@@ -12,6 +12,11 @@ export default {
   autoCompleteVisible: false,
   searchbarValue: "",
   animations: {
-    listShow: false
+    dropdown: {
+      collapsed: false
+    },
+    forecast: {
+      onScreen: false
+    }
   }
 };

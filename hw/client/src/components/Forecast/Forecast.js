@@ -3,13 +3,13 @@ import { html } from "lit-html";
 import { repeat } from "lit-html/directives/repeat";
 import ForecastDay from "../ForecastDay/ForecastDay";
 import store from "../../state/index";
-import { animate } from "./animations";
-
-store.events.subscribe("Animations:forecast", animate);
+import { show } from "./animations";
+import { hide } from "./animations";
 
 export default class Forecast extends Component {
   constructor() {
     super({ store });
+    store.events.subscribe("Animations:forecast", this.update);
     this.forecastDays = this.createForecastDays();
   }
 
@@ -29,5 +29,11 @@ export default class Forecast extends Component {
       array.push(new ForecastDay(i === 0, i));
     }
     return array;
+  };
+
+  update = data => {
+    const { onScreen } = store.state.animations.forecast;
+    if (onScreen) hide();
+    else show(data);
   };
 }
