@@ -7,15 +7,15 @@ export const animate = (target, delay) => {
       targets: el,
       delay: (index + 1) * 100,
       duration: 1000,
-      ease: "easeInCubic",
+      easing: "easeOutBack",
       translateY: -50
     });
     anime({
       targets: el,
       opacity: 1,
       delay: (index + 1) * 150,
-      duration: 2000,
-      ease: "linear"
+      duration: 200,
+      easing: "linear"
     });
   });
 };

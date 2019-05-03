@@ -7,18 +7,24 @@ import { animate } from "./animations";
 
 store.events.subscribe("Animations:forecast", animate);
 
-export const Forecast = () => {
-  const { available, current, forecast } = store.state.weather;
-  if (!available) return;
-  return html`
-    <div id="forecast" class="weather">
-      ${repeat(forecast, (day, index) =>
-        ForecastDay({
-          current: current,
-          forecast: day,
-          isToday: index === 0
-        })
-      )}
-    </div>
-  `;
-};
+export default class Forecast extends Component {
+  constructor() {
+    super({ store });
+  }
+
+  render() {
+    const { available, current, forecast } = store.state.weather;
+    if (!available) return;
+    return html`
+      <div id="forecast" class="weather">
+        ${repeat(forecast, (day, index) =>
+          ForecastDay({
+            current: current,
+            forecast: day,
+            isToday: index === 0
+          })
+        )}
+      </div>
+    `;
+  }
+}

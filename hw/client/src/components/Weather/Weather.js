@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import axios from "axios";
 import { getClientIP } from "../../helpers/IPHelper";
-import { Forecast } from "../Forecast/Forecast";
+import Forecast from "../Forecast/Forecast";
 import Component from "../Component";
 import AppHeader from "../AppHeader/AppHeader";
 import SearchBar from "../SearchBar/SearchBar";
@@ -12,6 +12,7 @@ export default class Weather extends Component {
   constructor() {
     super({ store });
     this.searchBar = new SearchBar();
+    this.forecast = new Forecast();
     store.events.subscribe("Searchbar:search", this.locationSearch);
     store.events.subscribe("List:location-selected", this.getWeatherForecast);
     // this.getByIP(); Going to make this a button
@@ -20,7 +21,8 @@ export default class Weather extends Component {
   render = data => {
     return html`
       <div id="main-view">
-        ${AppHeader("CAULD")} ${this.searchBar.render()} ${Forecast()}
+        ${AppHeader("CAULD")} ${this.searchBar.render()}
+        ${this.forecast.render()}
       </div>
       ${Footer()}
     `;
