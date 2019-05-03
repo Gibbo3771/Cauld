@@ -18,7 +18,7 @@ export default class Forecast extends Component {
     if (!available) return;
     return html`
       <div id="forecast" class="weather">
-        ${repeat(this.forecastDays, (day, index) => day.render(index))}
+        ${repeat(this.forecastDays, (day, index) => day.render())}
       </div>
     `;
   }

@@ -16,8 +16,8 @@ export const show = () => {
       complete: () => {
         anime({
           targets: el,
-          height: "100%",
-          duration: 120,
+          duration: 200,
+          maxHeight: "1000",
           easing: "linear"
         });
       }
@@ -32,8 +32,8 @@ export const hide = () => {
   if (!autoCompleteVisible) {
     anime({
       targets: el,
-      height: "0",
-      duration: 120,
+      maxHeight: "0",
+      duration: 200,
       easing: "linear",
       complete: () => {
         anime({

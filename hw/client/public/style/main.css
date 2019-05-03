@@ -49,7 +49,7 @@ body {
 
 .autocomplete-items {
   position: absolute;
-  height: 0;
+  max-height: 0;
   z-index: 10;
   overflow: hidden;
   top: 62.5%;
