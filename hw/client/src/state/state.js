@@ -1,3 +1,5 @@
+import ForecastDay from "../components/ForecastDay/ForecastDay";
+
 // Initial state
 export default {
   selectedLocation: null,

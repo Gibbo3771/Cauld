@@ -33,5 +33,9 @@ export default {
   setListShow(state, payload) {
     state.animations.listShow = payload;
     return state;
+  },
+  setIsToday(state, payload) {
+    state.weather.isToday = payload;
+    return state;
   }
 };

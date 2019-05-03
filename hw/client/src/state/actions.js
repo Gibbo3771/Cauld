@@ -22,5 +22,8 @@ export default {
   },
   setListShow(context, payload) {
     context.commit("setListShow", payload);
+  },
+  setIsToday(context, payload) {
+    context.commit("setIsToday", payload);
   }
 };

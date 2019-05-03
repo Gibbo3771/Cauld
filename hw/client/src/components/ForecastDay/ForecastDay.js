@@ -1,92 +1,102 @@
 import { getDayString, prettyDateParse } from "../../helpers/date_parser";
 import anime from "animejs";
 import { html, render } from "lit-html";
+import store from "../../state/index";
 import { classMap } from "lit-html/directives/class-map";
+import Component from "../Component";
 
-export const ForecastDay = props => {
-  const { date } = props.forecast;
-  const { isToday } = props;
-  const classes = {
-    "day-background": true,
-    "current-day": isToday
-  };
-  const markup = html`
-    <div id="${new Date(date).getDay()}-day" class=${classMap(classes)}>
-      <div id="header">
-        <div>
-          ${renderHeader(props)}
+export default class ForecastDay extends Component {
+  constructor(isToday, forecastIndex) {
+    super({ store });
+    this.isToday = isToday;
+    this.forecastIndex = forecastIndex;
+  }
+
+  render() {
+    const { date } = store.state.weather.forecast[this.forecastIndex];
+    const classes = {
+      "day-background": true,
+      "current-day": this.isToday
+    };
+    const markup = html`
+      <div id="${new Date(date).getDay()}-day" class=${classMap(classes)}>
+        <div id="header">
+          <div>
+            ${this.renderHeader()}
+          </div>
+        </div>
+        <div class="temp-current">
+          ${this.renderCurrentTemp()}
+        </div>
+        <div class="icon">
+          ${this.renderIcon()}
+        </div>
+        <div class="weather-descriptor">
+          ${this.renderWeatherDescriptor()}
+        </div>
+        <span class="temperature-range" }>
+          ${this.renderTempRange()}
+        </span>
+        <div class="wind">
+          ${this.isToday ? this.renderWind() : this.renderWindMax()}
         </div>
       </div>
-      <div class="temp-current">
-        ${renderCurrentTemp(props)}
-      </div>
-      <div class="icon">
-        ${renderIcon(props)}
-      </div>
-      <div class="weather-descriptor">
-        ${renderWeatherDescriptor(props)}
-      </div>
-      <span class="temperature-range" }>
-        ${renderTempRange(props)}
-      </span>
-      <div class="wind">
-        ${isToday ? renderWind(props) : renderWindMax(props)}
-      </div>
-    </div>
-  `;
-  return markup;
-};
+    `;
+    return markup;
+  }
 
-const renderHeader = props => {
-  const { date } = props.forecast;
-  return html`
-    <h1>${getDayString(new Date(date).getDay())}</h1>
-    <h3>${prettyDateParse(new Date(date)).descriptor}</h3>
-  `;
-};
+  renderHeader = () => {
+    const { date } = store.state.weather.forecast[this.forecastIndex];
+    return html`
+      <h1>${getDayString(new Date(date).getDay())}</h1>
+      <h3>${prettyDateParse(new Date(date)).descriptor}</h3>
+    `;
+  };
 
-const renderIcon = props => {
-  const { icon } = props.forecast;
-  return html`
-    <img src="http:${icon}" />
-  `;
-};
+  renderIcon = () => {
+    const { icon } = store.state.weather.forecast[this.forecastIndex];
+    return html`
+      <img src="http:${icon}" />
+    `;
+  };
 
-const renderWeatherDescriptor = props => {
-  const { descriptor } = props.forecast;
-  return html`
-    <p>${descriptor}</p>
-  `;
-};
+  renderWeatherDescriptor = () => {
+    const { descriptor } = store.state.weather.forecast[this.forecastIndex];
+    return html`
+      <p>${descriptor}</p>
+    `;
+  };
 
-const renderTempRange = props => {
-  const { minTempC, maxTempC } = props.forecast;
-  return html`
-    ${minTempC}c°<sub>Lo</sub> ${maxTempC}c°<sub>Hi</sub>
-  `;
-};
+  renderTempRange = () => {
+    const { minTempC, maxTempC } = store.state.weather.forecast[
+      this.forecastIndex
+    ];
+    return html`
+      ${minTempC}c°<sub>Lo</sub> ${maxTempC}c°<sub>Hi</sub>
+    `;
+  };
 
-const renderCurrentTemp = props => {
-  const { isToday } = props;
-  if (!isToday) return;
-  const { tempC } = props.current;
-  return html`
-    <p>${tempC}c°</p>
-  `;
-};
+  renderCurrentTemp = () => {
+    if (!this.isToday) return;
+    const { tempC } = store.state.weather.current;
+    return html`
+      <p>${tempC}c°</p>
+    `;
+  };
 
-const renderWind = props => {
-  const { windMPH } = props.current;
-  return html`
-    <h4>Wind</h4>
-    <p>${windMPH}mph</p>
-  `;
-};
+  renderWind = () => {
+    const { windMPH } = store.state.weather.current;
+    return html`
+      <h4>Wind</h4>
+      <p>${windMPH}mph</p>
+    `;
+  };
 
-const renderWindMax = props => {
-  const { maxWindMPH } = props.forecast;
-  return html`
-    <h4>Wind Max</h4>
-    <p>${maxWindMPH}mph</p>
-  `;
-};
+  renderWindMax = () => {
+    const { maxWindMPH } = store.state.weather.forecast[this.forecastIndex];
+    return html`
+      <h4>Wind Max</h4>
+      <p>${maxWindMPH}mph</p>
+    `;
+  };
+}
