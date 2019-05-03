@@ -8,5 +8,8 @@ export default {
     forecast: []
   },
   autoCompleteVisible: false,
-  searchbarValue: ""
+  searchbarValue: "",
+  animations: {
+    listShow: false
+  }
 };

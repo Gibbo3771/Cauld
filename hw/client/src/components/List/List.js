@@ -24,13 +24,22 @@ export default class List extends Component {
   }
 
   stateDidChange(prevState, nextState) {
-    if (nextState.locations.length > 0) {
+    const {
+      locations,
+      autoCompleteVisible,
+      searchbarValue,
+      animations
+    } = nextState;
+    if (autoCompleteVisible && !animations.listShow && locations.length > 0) {
+      store.dispatch("setListShow", true);
       show();
       return;
     } else if (
-      nextState.locations.length === 0 ||
-      nextState.searchbarValue.length <= 2
+      !autoCompleteVisible &&
+      animations.listShow &&
+      (locations.length === 0 || searchbarValue.length <= 2)
     ) {
+      store.dispatch("setListShow", false);
       hide();
     }
   }

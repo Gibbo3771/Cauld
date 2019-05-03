@@ -50,7 +50,6 @@ export default class SearchBar extends Component {
     const nextLen = nextState.searchbarValue.length;
     if (nextLen < prevLen && nextLen <= 2) {
       store.dispatch("autoCompleteVisible", false);
-      store.dispatch("addLocations", []);
     }
   }
 

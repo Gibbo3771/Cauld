@@ -19,5 +19,8 @@ export default {
   },
   setCurrentLocation(context, payload) {
     context.commit("setCurrentLocation", payload);
+  },
+  setListShow(context, payload) {
+    context.commit("setListShow", payload);
   }
 };

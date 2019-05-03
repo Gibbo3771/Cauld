@@ -1,3 +1,5 @@
+import { stat } from "fs";
+
 export default {
   addLocations(state, payload) {
     state.locations = payload;
@@ -25,6 +27,10 @@ export default {
   },
   setCurrentLocation(state, payload) {
     state.currentLocation = payload;
+    return state;
+  },
+  setListShow(state, payload) {
+    state.animations.listShow = payload;
     return state;
   }
 };
