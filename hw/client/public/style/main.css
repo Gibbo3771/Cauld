@@ -188,7 +188,8 @@ body {
     max-height: 400px;
     margin: 0.5rem;
     padding: 1.25rem;
-    border-right: 3px solid #f7e601; }
+    border-right: 3px solid #f7e601;
+    transform: translateY(5000); }
 
 .button-cross {
   position: absolute;

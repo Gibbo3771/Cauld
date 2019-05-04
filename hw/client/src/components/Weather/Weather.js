@@ -49,11 +49,11 @@ export default class Weather extends Component {
       .get(`/api/weather/forecast/${location.name}`)
       .then(response => {
         store.dispatch("setCurrentLocation", location);
-        // store.dispatch("setWeather", response.data);
+        store.dispatch("setWeather", response.data);
         store.dispatch("setWeatherAvailable", true);
         store.dispatch("autoCompleteVisible", false);
         store.dispatch("addLocations", []);
-        store.events.publish("Animations:forecast");
+        // store.events.publish("Animations:forecast");
       });
   };
 

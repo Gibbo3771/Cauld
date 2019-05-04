@@ -31,7 +31,7 @@ export default {
     return state;
   },
   setDropdownAnimationStatus(state, payload) {
-    state.animations.dropdown.collapsed = payload;
+    state.animations.dropdown.visible = payload;
     return state;
   },
   setForecastAnimationStatus(state, payload) {

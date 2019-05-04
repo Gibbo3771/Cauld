@@ -30,13 +30,17 @@ export default class List extends Component {
       searchbarValue,
       animations
     } = nextState;
-    if (autoCompleteVisible && !animations.listShow && locations.length > 0) {
+    if (
+      autoCompleteVisible &&
+      !animations.dropdown.visible &&
+      locations.length > 0
+    ) {
       store.dispatch("setDropdownAnimationStatus", true);
       show();
       return;
     } else if (
       !autoCompleteVisible &&
-      animations.listShow &&
+      animations.dropdown.visible &&
       (locations.length === 0 || searchbarValue.length <= 2)
     ) {
       store.dispatch("setDropdownAnimationStatus", false);
