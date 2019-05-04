@@ -1,12 +1,8 @@
 import { stat } from "fs";
 
 export default {
-  addLocations(state, payload) {
+  populateDropdown(state, payload) {
     state.locations = payload;
-    return state;
-  },
-  removeLocations(state, payload) {
-    state.locations = [];
     return state;
   },
   setWeatherAvailable(state, payload) {
@@ -18,16 +14,16 @@ export default {
     state.weather.forecast = payload.forecast;
     return state;
   },
-  autoCompleteVisible(state, payload) {
-    state.autoCompleteVisible = payload;
+  autocompleteReady(state, payload) {
+    state.autocompleteReady = payload;
     return state;
   },
   setSearchbarValue(state, payload) {
     state.searchbarValue = payload;
     return state;
   },
-  setCurrentLocation(state, payload) {
-    state.currentLocation = payload;
+  setSelectedLocation(state, payload) {
+    state.selectedLocation = payload;
     return state;
   },
   setDropdownAnimationStatus(state, payload) {

@@ -9,14 +9,14 @@ export default {
     current: null,
     forecast: []
   },
-  autoCompleteVisible: false,
+  autoCompleteReady: false,
   searchbarValue: "",
   animations: {
     dropdown: {
-      collapsed: false
+      visible: false
     },
     forecast: {
-      onScreen: false
+      onScreen: true
     }
   }
 };

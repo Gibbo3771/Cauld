@@ -8,6 +8,9 @@ import { classMap } from "lit-html/directives/class-map";
 export default class List extends Component {
   constructor() {
     super({ store });
+    store.events.subscribe("setCurrentLocation", () => {
+      store.dispatch("addLocations");
+    });
   }
 
   render() {
@@ -26,12 +29,12 @@ export default class List extends Component {
   stateDidChange(prevState, nextState) {
     const {
       locations,
-      autoCompleteVisible,
+      autocompleteReady,
       searchbarValue,
       animations
     } = nextState;
     if (
-      autoCompleteVisible &&
+      autocompleteReady &&
       !animations.dropdown.visible &&
       locations.length > 0
     ) {
@@ -39,7 +42,7 @@ export default class List extends Component {
       show();
       return;
     } else if (
-      !autoCompleteVisible &&
+      !autocompleteReady &&
       animations.dropdown.visible &&
       (locations.length === 0 || searchbarValue.length <= 2)
     ) {

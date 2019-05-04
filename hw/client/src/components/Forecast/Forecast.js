@@ -3,19 +3,16 @@ import { html } from "lit-html";
 import { repeat } from "lit-html/directives/repeat";
 import ForecastDay from "../ForecastDay/ForecastDay";
 import store from "../../state/index";
-import { show } from "./animations";
-import { hide } from "./animations";
+import { show, hide, setup } from "./animations";
 
 export default class Forecast extends Component {
   constructor() {
     super({ store });
-    store.events.subscribe("Animations:forecast", this.update);
     this.forecastDays = this.createForecastDays();
+    store.events.subscribe("App:location-ready", this.update);
   }
 
   render() {
-    const { available, current, forecast, forecastDays } = store.state.weather;
-    if (!available) return;
     return html`
       <div id="forecast" class="weather">
         ${repeat(this.forecastDays, day => day.render())}
@@ -31,9 +28,9 @@ export default class Forecast extends Component {
     return array;
   };
 
-  update = data => {
+  update = () => {
     const { onScreen } = store.state.animations.forecast;
     if (onScreen) hide();
-    else show(data);
+    else show();
   };
 }

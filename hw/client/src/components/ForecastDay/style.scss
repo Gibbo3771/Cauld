@@ -47,12 +47,6 @@
   text-align: center;
 }
 
-.day-background {
-  @include font-color();
-  background-color: $complimentary-primary-color;
-  opacity: 0;
-}
-
 .current-day {
   // border: 1px solid rgb(71, 69, 69);
 }

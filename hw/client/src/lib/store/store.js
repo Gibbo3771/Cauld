@@ -17,7 +17,6 @@ export default class Store {
       console.error(`Action ${actionKey} does not exist`);
       return false;
     }
-    console.log(actionKey);
     this.actions[actionKey](this, payload);
 
     return true;
