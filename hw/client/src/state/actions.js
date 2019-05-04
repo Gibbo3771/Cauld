@@ -1,6 +1,9 @@
 export default {
-  populateDropdown(context, payload) {
-    context.commit("populateDropdown", payload);
+  addLocations(context, payload) {
+    context.commit("addLocations", payload);
+  },
+  removeLocations(context, payload) {
+    context.commit("removeLocations", payload);
   },
   setWeatherAvailable(context, payload) {
     context.commit("setWeatherAvailable", payload);
@@ -8,19 +11,19 @@ export default {
   setWeather(context, payload) {
     context.commit("setWeather", payload);
   },
-  autocompleteReady(context, payload) {
-    context.commit("autocompleteReady", payload);
+  autoCompleteVisible(context, payload) {
+    context.commit("autoCompleteVisible", payload);
   },
   setSearchbarValue(context, payload) {
     context.commit("setSearchbarValue", payload);
   },
-  setSelectedLocation(context, payload) {
-    context.commit("setSelectedLocation", payload);
+  setCurrentLocation(context, payload) {
+    context.commit("setCurrentLocation", payload);
   },
-  setDropdownAnimationStatus(context, payload) {
-    context.commit("setDropdownAnimationStatus", payload);
+  setListShow(context, payload) {
+    context.commit("setListShow", payload);
   },
-  setForecastAnimationStatus(context, payload) {
-    context.commit("setForecastAnimationStatus", payload);
+  setIsToday(context, payload) {
+    context.commit("setIsToday", payload);
   }
 };

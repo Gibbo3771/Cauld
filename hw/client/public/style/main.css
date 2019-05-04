@@ -166,16 +166,20 @@ body {
   font-size: 1.15rem;
   text-align: center; }
 
+.day-background {
+  color: #ecebeb;
+  background-color: #202020;
+  opacity: 0; }
+
 .weather {
-  display: none;
+  display: flex;
   width: 90%;
   height: 100%;
   color: white;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap; }
-  .weather .day-background {
-    color: #ecebeb;
+  .weather > div {
     display: grid;
     grid-template-areas: "date date temp" ". icon ." "descriptor descriptor descriptor" "temp-range temp-range temp-range" " . wind .";
     grid-template-columns: 90px 90px 90px;
@@ -184,10 +188,7 @@ body {
     max-height: 400px;
     margin: 0.5rem;
     padding: 1.25rem;
-    border-right: 3px solid #f7e601;
-    background-color: #202020;
-    opacity: 0;
-    transform: translateY(1000px); }
+    border-right: 3px solid #f7e601; }
 
 .button-cross {
   position: absolute;

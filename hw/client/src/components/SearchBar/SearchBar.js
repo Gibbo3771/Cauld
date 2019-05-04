@@ -42,7 +42,7 @@ export default class SearchBar extends Component {
     const value = evt.target.value;
     this.setInputValue(value);
     if (value.length <= 2) return;
-    store.dispatch("autocompleteReady", true);
+    store.dispatch("autoCompleteVisible", true);
     store.events.publish("Searchbar:search", store.state.searchbarValue);
   };
 
@@ -50,16 +50,16 @@ export default class SearchBar extends Component {
     const prevLen = prevState.searchbarValue.length;
     const nextLen = nextState.searchbarValue.length;
     if (nextLen < prevLen && nextLen <= 2) {
-      store.dispatch("autocompleteReady", false);
+      store.dispatch("autoCompleteVisible", false);
     }
   }
 
   onSomeSortOfFocus = () => {
-    store.dispatch("autocompleteReady", true);
+    store.dispatch("autoCompleteVisible", true);
   };
 
   onMouseLeave = () => {
-    store.dispatch("autocompleteReady", false);
+    store.dispatch("autoCompleteVisible", false);
   };
 
   setInputValue = value => {

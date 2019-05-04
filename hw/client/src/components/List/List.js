@@ -8,9 +8,6 @@ import { classMap } from "lit-html/directives/class-map";
 export default class List extends Component {
   constructor() {
     super({ store });
-    store.events.subscribe("setCurrentLocation", () => {
-      store.dispatch("addLocations");
-    });
   }
 
   render() {
@@ -29,24 +26,20 @@ export default class List extends Component {
   stateDidChange(prevState, nextState) {
     const {
       locations,
-      autocompleteReady,
+      autoCompleteVisible,
       searchbarValue,
       animations
     } = nextState;
-    if (
-      autocompleteReady &&
-      !animations.dropdown.visible &&
-      locations.length > 0
-    ) {
-      store.dispatch("setDropdownAnimationStatus", true);
+    if (autoCompleteVisible && !animations.listShow && locations.length > 0) {
+      store.dispatch("setListShow", true);
       show();
       return;
     } else if (
-      !autocompleteReady &&
-      animations.dropdown.visible &&
+      !autoCompleteVisible &&
+      animations.listShow &&
       (locations.length === 0 || searchbarValue.length <= 2)
     ) {
-      store.dispatch("setDropdownAnimationStatus", false);
+      store.dispatch("setListShow", false);
       hide();
     }
   }

@@ -18,7 +18,6 @@ export default class Store {
       return false;
     }
     this.actions[actionKey](this, payload);
-
     return true;
   }
 

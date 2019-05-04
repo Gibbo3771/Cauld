@@ -1,8 +1,12 @@
 import { stat } from "fs";
 
 export default {
-  populateDropdown(state, payload) {
+  addLocations(state, payload) {
     state.locations = payload;
+    return state;
+  },
+  removeLocations(state, payload) {
+    state.locations = [];
     return state;
   },
   setWeatherAvailable(state, payload) {
@@ -14,24 +18,24 @@ export default {
     state.weather.forecast = payload.forecast;
     return state;
   },
-  autocompleteReady(state, payload) {
-    state.autocompleteReady = payload;
+  autoCompleteVisible(state, payload) {
+    state.autoCompleteVisible = payload;
     return state;
   },
   setSearchbarValue(state, payload) {
     state.searchbarValue = payload;
     return state;
   },
-  setSelectedLocation(state, payload) {
-    state.selectedLocation = payload;
+  setCurrentLocation(state, payload) {
+    state.currentLocation = payload;
     return state;
   },
-  setDropdownAnimationStatus(state, payload) {
-    state.animations.dropdown.visible = payload;
+  setListShow(state, payload) {
+    state.animations.listShow = payload;
     return state;
   },
-  setForecastAnimationStatus(state, payload) {
-    state.animations.forecast.onScreen = payload;
+  setIsToday(state, payload) {
+    state.weather.isToday = payload;
     return state;
   }
 };

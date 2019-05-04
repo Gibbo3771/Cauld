@@ -1,5 +1,6 @@
 .weather {
-  display: none;
+  display: flex;
+  // opacity: 0;
   width: 90%;
   height: 100%;
   color: white;
@@ -8,8 +9,7 @@
   // padding: 2rem;
   flex-wrap: wrap;
 
-  .day-background {
-    @include font-color();
+  > div {
     display: grid;
     grid-template-areas: "date date temp" ". icon ." "descriptor descriptor descriptor" "temp-range temp-range temp-range" " . wind .";
     grid-template-columns: 90px 90px 90px;
@@ -19,8 +19,5 @@
     margin: 0.5rem;
     padding: 1.25rem;
     border-right: 3px solid $secondary-color;
-    background-color: $complimentary-primary-color;
-    opacity: 0;
-    transform: translateY(1000px);
   }
 }

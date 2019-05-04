@@ -3,19 +3,22 @@ import { html } from "lit-html";
 import { repeat } from "lit-html/directives/repeat";
 import ForecastDay from "../ForecastDay/ForecastDay";
 import store from "../../state/index";
-import { show, hide, setup } from "./animations";
+import { animate } from "./animations";
+
+store.events.subscribe("Animations:forecast", animate);
 
 export default class Forecast extends Component {
   constructor() {
     super({ store });
     this.forecastDays = this.createForecastDays();
-    store.events.subscribe("App:location-ready", this.update);
   }
 
   render() {
+    const { available, current, forecast, forecastDays } = store.state.weather;
+    if (!available) return;
     return html`
       <div id="forecast" class="weather">
-        ${repeat(this.forecastDays, day => day.render())}
+        ${repeat(this.forecastDays, (day, index) => day.render())}
       </div>
     `;
   }
@@ -26,11 +29,5 @@ export default class Forecast extends Component {
       array.push(new ForecastDay(i === 0, i));
     }
     return array;
-  };
-
-  update = () => {
-    const { onScreen } = store.state.animations.forecast;
-    if (onScreen) hide();
-    else show();
   };
 }

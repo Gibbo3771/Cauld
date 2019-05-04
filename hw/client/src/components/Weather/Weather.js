@@ -13,12 +13,8 @@ export default class Weather extends Component {
     super({ store });
     this.searchBar = new SearchBar();
     this.forecast = new Forecast();
-    store.events.subscribe("Searchbar:search", this.onLocationSearch);
-    store.events.subscribe("List:location-selected", this.onLocationSelected);
-    store.events.subscribe(
-      "Animations:forecast-off-screen",
-      this.getWeatherForecast
-    );
+    store.events.subscribe("Searchbar:search", this.locationSearch);
+    store.events.subscribe("List:location-selected", this.getWeatherForecast);
     // this.getByIP(); Going to make this a button
   }
 
@@ -31,13 +27,6 @@ export default class Weather extends Component {
       ${Footer()}
     `;
   };
-
-  stateDidChange(prevState, nextState) {
-    if (!prevState.weather.available) return;
-    if (!prevState.animations.forecast.onScreen) {
-      console.log("why so many");
-    }
-  }
 
   getByIP = () => {
     axios
@@ -55,27 +44,22 @@ export default class Weather extends Component {
       });
   };
 
-  getWeatherForecast = () => {
-    const { selectedLocation } = store.state;
+  getWeatherForecast = location => {
     return axios
-      .get(`/api/weather/forecast/${selectedLocation.name}`)
+      .get(`/api/weather/forecast/${location.name}`)
       .then(response => {
-        console.log("get weather");
+        store.dispatch("setCurrentLocation", location);
         store.dispatch("setWeather", response.data);
-        store.dispatch("autocompleteReady", false);
-        store.dispatch("populateDropdown", []);
+        store.dispatch("setWeatherAvailable", true);
+        store.dispatch("autoCompleteVisible", false);
+        store.dispatch("addLocations", []);
+        store.events.publish("Animations:forecast");
       });
   };
 
-  onLocationSelected = location => {
-    store.dispatch("setSelectedLocation", location);
-    store.dispatch("setWeatherAvailable", false);
-    store.events.publish("App:location-ready");
-  };
-
-  onLocationSearch = location => {
+  locationSearch = location => {
     return axios.get(`/api/weather/search/${location}`).then(response => {
-      store.dispatch("populateDropdown", response.data);
+      store.dispatch("addLocations", response.data);
       store.events.publish("Animations:autocomplete-open");
     });
   };

@@ -1,4 +1,5 @@
 import { getDayString, prettyDateParse } from "../../helpers/date_parser";
+import anime from "animejs";
 import { html, render } from "lit-html";
 import store from "../../state/index";
 import { classMap } from "lit-html/directives/class-map";
@@ -12,17 +13,11 @@ export default class ForecastDay extends Component {
   }
 
   render() {
-    const { available } = store.state.weather;
+    const { date } = store.state.weather.forecast[this.forecastIndex];
     const classes = {
       "day-background": true,
       "current-day": this.isToday
     };
-    if (!available) {
-      return html`
-        <div class=${classMap(classes)}></div>
-      `;
-    }
-    const { date } = store.state.weather.forecast[this.forecastIndex];
     const markup = html`
       <div id="${new Date(date).getDay()}-day" class=${classMap(classes)}>
         <div id="header">
