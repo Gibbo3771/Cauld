@@ -17,7 +17,7 @@ const renderIcon = () => {
   return html`
     <div class="footer">
       <a
-        href="https://github.com/Gibbo3771/Weather-forecaster/tree/master/hw"
+        href="https://github.com/Gibbo3771/Cauld"
         class=${classMap(classes)}
       ></a>
       <a
