@@ -27,10 +27,7 @@ Copy and paste the following into your terminal:
 ```
 npm i && npm run build && npm start
 ```
-
-Go to `localhost:8080`.
-=======
-In your terminal run `npm run build`, then you can open up `index.html` from the public folder into your desired browser.
+ Then go to `localhost:8080`
 
 
 ## TODO
